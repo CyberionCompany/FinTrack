@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Tracker | Dashboard</title>
+    <link rel="stylesheet" href="/DashboardAssets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-user">
+                <img src="https://i.pravatar.cc/150?u=nickjenkins" alt="Foto de Perfil">
+                <div class="sidebar-user-info">
+                    <h4><%= user.name %></h4>
+                    <p><%= user.email %></p>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <button class="btn-add-new" id="open-modal-btn">+ Adicionar Transação</button>
+                <ul>
+                    <li><a href="#" class="active"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg></span> Dashboard</a></li>
+                    <li><a href="#"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></span> Transações</a></li>
+                    <li><a href="#"><span><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg></span> Contas</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="pro-account">
+                    <span>🚀</span>
+                    <div>
+                        <strong>Seja Pro</strong>
+                        <p>Controle total</p>
+                    </div>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="main-header">
+                <h2>Meu Dashboard</h2>
+                <div class="header-filters">
+                    <input type="month" id="month-filter">
+                </div>
+            </header>
+
+            <div class="cards-grid">
+                <div class="card card-balance">
+                    <p>Saldo do Mês</p>
+                    <h3 id="balance-value">R$ 0,00</h3>
+                    <div class="progress-bar"><div id="balance-progress" class="progress"></div></div>
+                </div>
+                <div class="card card-expense">
+                    <p>Despesas do Mês</p>
+                    <h3 id="expense-value">R$ 0,00</h3>
+                    <div class="progress-bar"><div id="expense-progress" class="progress"></div></div>
+                </div>
+                <div class="card card-income">
+                    <p>Receitas do Mês</p>
+                    <h3 id="income-value">R$ 0,00</h3>
+                    <div class="progress-bar"><div id="income-progress" class="progress"></div></div>
+                </div>
+                <div class="card card-statistics">
+                    <h4>Despesas por Categoria</h4>
+                    <canvas id="statistics-chart"></canvas>
+                </div>
+                <div class="card card-balance-pie">
+                    <h4>Balanço do Mês</h4>
+                    <canvas id="balance-chart"></canvas>
+                </div>
+                <div class="card card-transactions">
+                    <h4>Transações do Mês</h4>
+                    <ul id="transaction-list"></ul>
+                </div>
+                <div class="card card-ai-analysis">
+                    <h4>Análise IA & Recomendações</h4>
+                    <div id="ai-content">
+                        <p>Clique para uma análise financeira e previsões baseadas nos dados do mês.</p>
+                        <button class="btn-analyze" id="analyze-btn">Analisar com Gemini</button>
+                        <div id="loading-ai" style="display: none;">Analisando dados...</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="transaction-modal" class="modal-container hidden">
+        <div class="modal-content">
+            <button class="close-modal-btn" id="close-modal-btn">&times;</button>
+            <h3>Adicionar Nova Transação</h3>
+            <form id="transaction-form">
+                <div class="form-group"><label for="type">Tipo</label><select id="type" name="type" required><option value="expense">Despesa</option><option value="income">Receita</option></select></div>
+                <div class="form-group"><label for="description">Descrição</label><input type="text" id="description" name="description" placeholder="Ex: Conta de Luz" required></div>
+                <div class="form-group"><label for="amount">Valor</label><input type="number" id="amount" name="amount" placeholder="150,00" step="0.01" required></div>
+                <div class="form-group" id="category-group"><label for="category">Categoria</label><select id="category" name="category"><option value="moradia">Moradia</option><option value="alimentacao">Alimentação</option><option value="transporte">Transporte</option><option value="lazer">Lazer</option><option value="saude">Saúde</option><option value="outros">Outros</option></select></div>
+                <div class="form-group"><label for="date">Data</label><input type="date" id="date" name="date" required></div>
+                <button type="submit" class="btn-submit">Salvar Transação</button>
+            </form>
+        </div>
+    </div>
+    <script src="/DashboardAssets/js/main.js"></script>
+</body>
+</html>
