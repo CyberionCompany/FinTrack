@@ -78,3 +78,19 @@ body { font-family: 'Poppins', sans-serif; background-color: var(--bg-dark); col
 /* ---- RESPONSIVIDADE ---- */
 @media (max-width: 1200px) { .cards-grid { grid-template-columns: 1fr 1fr; } .card-balance, .card-expense, .card-income, .card-statistics, .card-balance-pie, .card-transactions, .card-ai-analysis { grid-column: span 2; } }
 @media (max-width: 768px) { .dashboard-container { flex-direction: column; } .sidebar { width: 100%; height: auto; } .sidebar-nav, .sidebar-footer { display: none; } .main-content { padding: 1.5rem; } .cards-grid { grid-template-columns: 1fr; } .card-balance, .card-expense, .card-income, .card-statistics, .card-balance-pie, .card-transactions, .card-ai-analysis { grid-column: span 1; } }
+
+#analyze-btn{
+  background-color: #7a3de8; 
+  color: white;  
+  padding: 2vh;
+  border: none;
+  width: 10vw;  
+  font-size: 1em; 
+  transition: 1.2s;
+  border-radius: 1vh;
+} 
+#analyze-btn:hover {
+    cursor:  pointer;  
+    transition: 1.2s;
+    background-color: #8b57ec;
+}

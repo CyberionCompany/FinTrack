@@ -34,10 +34,6 @@ const TransactionSchema = new mongoose.Schema({
         required: true,
     },
 
-    account: {
-        type: mongoose.Schema.Types.ObjectId,
-        required: true,
-    }
     
 }, {
     timestamps: true

@@ -171,3 +171,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+    account: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+    }
