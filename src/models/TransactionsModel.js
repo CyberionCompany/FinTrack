@@ -1,42 +1,13 @@
-const mongoose = require('mongoose');
 
-const TransactionSchema = new mongoose.Schema({
-    description: {
-        type: String,
-        required: [true, 'A descrição é obrigatória.'],
-        trim: true,
-    },
-    amount: {
-        type: Number,
-        required: [true, 'O valor é obrigatório.'],
-        // O valor é sempre positivo. O `type` define se é entrada ou saída.
-        validate: [val => val > 0, 'O valor deve ser positivo.']
-    },
-    type: {
-        type: String,
-        required: true,
-        enum: ['income', 'expense'], // Só permite esses dois valores
-    },
-    category: {
-        type: String,
-        required: [true, 'A categoria é obrigatória.'],
-        trim: true,
-    },
-    date: {
-        type: Date,
-        required: [true, 'A data é obrigatória.'],
-    },
+const TransactionSchema = new Schema({
+    description: { type: String, required: true },
+    amount: { type: Number, required: true },
+    type: { type: String, enum: ['income', 'expense'], required: true },
+    date: { type: Date, required: true },
+    user: { type: Schema.Types.ObjectId, ref: 'Accounts', required: true, index: true },
+    account: { type: Schema.Types.ObjectId, ref: 'Account', required: true },
+    category: { type: Schema.Types.ObjectId, ref: 'Category', required: true },
+}, { timestamps: true });
 
-
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User', // Aponta para o modelo 'User'
-        required: true,
-    },
-
-    
-}, {
-    timestamps: true
-});
-
-module.exports = mongoose.model('Transaction', TransactionSchema);
+// Exportando os modelos
+export const Transaction = mongoose.model('Transaction', TransactionSchema);
