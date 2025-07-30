@@ -179,10 +179,29 @@
                     <i data-feather="plus" class="w-5 h-5"></i>
                     Nova Transação
                 </button>
+                 <button id="manage-accounts-btn" class="w-full sm:w-auto flex-1 bg-slate-700 text-slate-200 py-3 px-6 rounded-lg font-semibold hover:bg-slate-600 transition-colors flex items-center justify-center gap-2 border border-slate-600">
+                    <i data-feather="credit-card" class="w-5 h-5"></i>
+                    Gerenciar Contas
+                </button>
                 <button id="manage-categories-btn" class="w-full sm:w-auto flex-1 bg-slate-700 text-slate-200 py-3 px-6 rounded-lg font-semibold hover:bg-slate-600 transition-colors flex items-center justify-center gap-2 border border-slate-600">
                     <i data-feather="tag" class="w-5 h-5"></i>
                     Gerenciar Categorias
                 </button>
+            </section>
+            
+            <section id="accounts-section" class="mb-8 fade-in-up" style="animation-delay: 150ms;">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+                        <h3 class="text-lg font-semibold text-white">💰 Contas e Carteiras</h3>
+                        <p id="total-balance-all-accounts" class="text-xl font-bold text-slate-300">Saldo Total: R$ 0,00</p>
+                    </div>
+                    <div id="accounts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        </div>
+                    <p id="no-accounts-msg" class="text-center text-slate-500 py-12 hidden">
+                        <i data-feather="credit-card" class="mx-auto w-12 h-12 mb-2"></i>
+                        Nenhuma conta cadastrada. Adicione uma para começar!
+                    </p>
+                </div>
             </section>
 
             <section id="summary" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -209,30 +228,49 @@
                 </div>
             </section>
 
+            <section id="goals-section" class="mb-8 fade-in-up" style="animation-delay: 500ms;">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                    <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+                        <h3 class="text-lg font-semibold text-white">🎯 Metas de Economia</h3>
+                        <button id="add-goal-btn" class="bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center gap-2 text-sm">
+                            <i data-feather="plus" class="w-4 h-4"></i>
+                            Nova Meta
+                        </button>
+                    </div>
+                    <div id="goals-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        </div>
+                    <p id="no-goals-msg" class="text-center text-slate-500 py-12 hidden">
+                        <i data-feather="target" class="mx-auto w-12 h-12 mb-2"></i>
+                        Nenhuma meta definida. Que tal criar uma agora?
+                    </p>
+                </div>
+            </section>
+
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 500ms;">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 600ms;">
                     <h3 class="text-lg font-semibold mb-4 text-white">Distribuição de Despesas (Filtro)</h3>
                     <div class="chart-container"><canvas id="expense-pie-chart"></canvas></div>
                 </div>
-                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 600ms;">
+                <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 700ms;">
                     <h3 class="text-lg font-semibold mb-4 text-white">Receitas x Despesas (Últimos 6 Meses)</h3>
                     <div class="chart-container"><canvas id="monthly-trend-chart"></canvas></div>
                 </div>
             </section>
             <section class="mb-8">
-                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 700ms;">
+                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 800ms;">
                     <h3 class="text-lg font-semibold mb-4 text-white">Evolução do Saldo Total (com Previsão)</h3>
                     <div class="chart-container"><canvas id="balance-trend-chart"></canvas></div>
                 </div>
             </section>
 
-             <section id="filters" class="bg-slate-800 p-4 rounded-2xl border border-slate-700 mb-8 fade-in-up" style="animation-delay: 800ms;">
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+             <section id="filters" class="bg-slate-800 p-4 rounded-2xl border border-slate-700 mb-8 fade-in-up" style="animation-delay: 900ms;">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                     <div>
                         <label for="filter-period" class="text-sm font-medium text-slate-400">Período</label>
                         <select id="filter-period" class="w-full mt-1 p-2 bg-slate-700 border border-slate-600 rounded-lg text-white">
                             <option value="current_month">Este Mês</option>
                             <option value="last_month">Mês Anterior</option>
+                            <option value="all_time">Todo o período</option>
                             <option value="custom">Personalizado</option>
                         </select>
                     </div>
@@ -252,13 +290,20 @@
                             <option value="all">Todos</option>
                             <option value="income">Receitas</option>
                             <option value="expense">Despesas</option>
+                            <option value="transfer">Transferências</option>
                         </select>
                     </div>
                     <div>
                         <label for="filter-category" class="text-sm font-medium text-slate-400">Categoria</label>
                         <select id="filter-category" class="w-full mt-1 p-2 bg-slate-700 border border-slate-600 rounded-lg text-white">
                             <option value="all">Todas</option>
-                            </select>
+                             </select>
+                    </div>
+                     <div>
+                        <label for="filter-account" class="text-sm font-medium text-slate-400">Conta</label>
+                        <select id="filter-account" class="w-full mt-1 p-2 bg-slate-700 border border-slate-600 rounded-lg text-white">
+                            <option value="all">Todas</option>
+                        </select>
                     </div>
                      <div>
                         <label for="filter-text" class="text-sm font-medium text-slate-400">Descrição</label>
@@ -267,7 +312,7 @@
                 </div>
             </section>
 
-            <section id="transactions-list" class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 900ms;">
+            <section id="transactions-list" class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 1000ms;">
                 <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
                     <h3 class="text-lg font-semibold text-white">Histórico de Lançamentos</h3>
                     <div class="flex gap-2">
@@ -285,7 +330,7 @@
                     <table class="w-full text-left">
                         <thead>
                             <tr class="border-b border-slate-700">
-                                <th class="p-3 text-sm font-semibold text-slate-400">Descrição</th>
+                                <th class="p-3 text-sm font-semibold text-slate-400">Descrição / Conta</th>
                                 <th class="p-3 text-sm font-semibold text-slate-400">Valor</th>
                                 <th class="p-3 text-sm font-semibold text-slate-400 hidden md:table-cell">Categoria</th>
                                 <th class="p-3 text-sm font-semibold text-slate-400 hidden md:table-cell">Data</th>
@@ -309,9 +354,10 @@
             <h3 id="modal-title" class="text-2xl font-bold mb-6 text-white">Adicionar Transação</h3>
             <form id="transaction-form">
                 <input type="hidden" id="transaction-id">
-                <div class="grid grid-cols-2 gap-4 mb-4">
+                <div class="grid grid-cols-3 gap-4 mb-4">
                     <button type="button" id="type-income" class="p-3 border border-slate-600 rounded-lg text-center font-semibold transition-colors text-slate-300">Receita</button>
                     <button type="button" id="type-expense" class="p-3 border border-slate-600 rounded-lg text-center font-semibold transition-colors text-slate-300">Despesa</button>
+                    <button type="button" id="type-transfer" class="p-3 border border-slate-600 rounded-lg text-center font-semibold transition-colors text-slate-300">Transferência</button>
                 </div>
                 <input type="hidden" id="transaction-type" required>
 
@@ -323,39 +369,62 @@
                     <label for="transaction-description" class="block text-sm font-medium text-slate-400 mb-1">Descrição</label>
                     <input type="text" id="transaction-description" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="Ex: Salário, Aluguel">
                 </div>
-                <div class="mb-4">
-                    <label for="transaction-category" class="block text-sm font-medium text-slate-400 mb-1">Categoria</label>
-                    <select id="transaction-category" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
-                        </select>
+                
+                <div id="income-expense-fields">
+                    <div class="mb-4">
+                        <label for="transaction-account" class="block text-sm font-medium text-slate-400 mb-1">Conta</label>
+                        <select id="transaction-account" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white"></select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="transaction-category" class="block text-sm font-medium text-slate-400 mb-1">Categoria</label>
+                        <select id="transaction-category" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white"></select>
+                    </div>
                 </div>
+
+                <div id="transfer-fields" class="hidden">
+                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="transfer-source-account" class="block text-sm font-medium text-slate-400 mb-1">Conta de Origem</label>
+                            <select id="transfer-source-account" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white"></select>
+                        </div>
+                        <div>
+                            <label for="transfer-destination-account" class="block text-sm font-medium text-slate-400 mb-1">Conta de Destino</label>
+                            <select id="transfer-destination-account" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white"></select>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="mb-4">
                     <label for="transaction-date" class="block text-sm font-medium text-slate-400 mb-1">Data</label>
                     <input type="date" id="transaction-date" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
                 </div>
                 
-                <div class="border-t border-slate-700 my-6"></div>
-                <div class="space-y-4">
-                    <div class="flex items-center">
-                        <input type="checkbox" id="is-recurring" class="h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500">
-                        <label for="is-recurring" class="ml-3 block text-sm font-medium text-slate-300">Lançamento Recorrente</label>
-                    </div>
-                    <div id="recurring-options" class="hidden space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label for="recurring-frequency" class="block text-sm font-medium text-slate-400 mb-1">Frequência</label>
-                                <select id="recurring-frequency" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
-                                    <option value="weekly">Semanalmente</option>
-                                    <option value="monthly">Mensalmente</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label for="recurring-end-date" class="block text-sm font-medium text-slate-400 mb-1">Até (opcional)</label>
-                                <input type="date" id="recurring-end-date" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
-                            </div>
+                <div id="recurring-section">
+                    <div class="border-t border-slate-700 my-6"></div>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <input type="checkbox" id="is-recurring" class="h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                            <label for="is-recurring" class="ml-3 block text-sm font-medium text-slate-300">Lançamento Recorrente</label>
                         </div>
-                        <p class="text-xs text-slate-500">A primeira transação será criada na data acima. As próximas serão geradas automaticamente.</p>
+                        <div id="recurring-options" class="hidden space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="recurring-frequency" class="block text-sm font-medium text-slate-400 mb-1">Frequência</label>
+                                    <select id="recurring-frequency" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                                        <option value="weekly">Semanalmente</option>
+                                        <option value="monthly">Mensalmente</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="recurring-end-date" class="block text-sm font-medium text-slate-400 mb-1">Até (opcional)</label>
+                                    <input type="date" id="recurring-end-date" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                                </div>
+                            </div>
+                            <p class="text-xs text-slate-500">A primeira transação será criada na data acima. As próximas serão geradas automaticamente.</p>
+                        </div>
                     </div>
                 </div>
+
                 <div class="flex justify-end gap-4 mt-6">
                     <button type="button" id="cancel-transaction" class="px-6 py-2 border border-slate-600 rounded-lg font-semibold hover:bg-slate-700 text-slate-300">Cancelar</button>
                     <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700">Salvar</button>
@@ -363,6 +432,52 @@
             </form>
         </div>
     </div>
+    
+    <div id="account-modal" class="modal fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden transition-opacity duration-300 opacity-0">
+        <div class="modal-content bg-slate-800 w-full max-w-lg p-8 rounded-2xl shadow-2xl border border-slate-700">
+            <div class="flex justify-between items-center mb-6">
+                <h3 id="account-modal-title" class="text-2xl font-bold text-white">Adicionar Conta</h3>
+                <button id="close-account-modal" class="text-slate-400 hover:text-white">&times;</button>
+            </div>
+            
+            <div class="mb-6">
+                <h4 class="text-lg font-semibold text-white mb-2">Contas Existentes</h4>
+                <div id="account-list" class="space-y-2 max-h-48 overflow-y-auto pr-2">
+                    </div>
+            </div>
+
+            <div class="border-t border-slate-700 pt-6">
+                <h4 id="account-form-title" class="text-lg font-semibold text-white mb-4">Adicionar Nova Conta</h4>
+                <form id="account-form">
+                    <input type="hidden" id="account-id">
+                    <div class="mb-4">
+                        <label for="account-name" class="block text-sm font-medium text-slate-400 mb-1">Nome da Conta</label>
+                        <input type="text" id="account-name" placeholder="Ex: NuConta, Carteira" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                    </div>
+                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="account-type" class="block text-sm font-medium text-slate-400 mb-1">Tipo</label>
+                            <select id="account-type" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                                <option value="Conta Corrente">Conta Corrente</option>
+                                <option value="Carteira">Carteira</option>
+                                <option value="Investimento">Investimento</option>
+                                <option value="Outro">Outro</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="account-initial-balance" class="block text-sm font-medium text-slate-400 mb-1">Saldo Inicial (R$)</label>
+                            <input type="number" step="0.01" id="account-initial-balance" value="0" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                        </div>
+                    </div>
+                    <div class="flex justify-end gap-4 mt-6">
+                        <button type="button" id="cancel-account-edit" class="px-6 py-2 border border-slate-600 rounded-lg font-semibold hover:bg-slate-700 text-slate-300 hidden">Cancelar Edição</button>
+                        <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700">Salvar Conta</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <div id="category-modal" class="modal fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden transition-opacity duration-300 opacity-0">
         <div class="modal-content bg-slate-800 w-full max-w-lg p-8 rounded-2xl shadow-2xl border border-slate-700">
@@ -380,6 +495,46 @@
             </form>
             <div id="category-list" class="space-y-2 max-h-64 overflow-y-auto pr-2">
                 </div>
+        </div>
+    </div>
+    
+    <div id="goal-modal" class="modal fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden transition-opacity duration-300 opacity-0">
+        <div class="modal-content bg-slate-800 w-full max-w-lg p-8 rounded-2xl shadow-2xl border border-slate-700">
+             <h3 id="goal-modal-title" class="text-2xl font-bold mb-6 text-white">Nova Meta</h3>
+             <form id="goal-form">
+                 <input type="hidden" id="goal-id">
+                 <div class="mb-4">
+                    <label for="goal-name" class="block text-sm font-medium text-slate-400 mb-1">Nome da Meta</label>
+                    <input type="text" id="goal-name" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="Ex: Economia para Viagem">
+                </div>
+                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                     <div>
+                         <label for="goal-type" class="block text-sm font-medium text-slate-400 mb-1">Tipo de Meta</label>
+                         <select id="goal-type" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                            <option value="savings">Meta de Economia</option>
+                            <option value="spendingLimit">Limite de Gastos</option>
+                        </select>
+                    </div>
+                     <div>
+                         <label for="goal-target-amount" class="block text-sm font-medium text-slate-400 mb-1">Valor Alvo (R$)</label>
+                        <input type="number" step="0.01" id="goal-target-amount" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white" placeholder="500,00">
+                    </div>
+                </div>
+                 <div class="mb-4">
+                     <label for="goal-target-date" class="block text-sm font-medium text-slate-400 mb-1">Data Alvo</label>
+                    <input type="date" id="goal-target-date" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                </div>
+                 <div id="goal-categories-container" class="mb-4 hidden">
+                     <label for="goal-categories" class="block text-sm font-medium text-slate-400 mb-1">Categorias para Limitar Gastos</label>
+                     <select id="goal-categories" multiple class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white h-32">
+                         </select>
+                     <p class="text-xs text-slate-500 mt-1">Segure Ctrl (ou Cmd) para selecionar múltiplas categorias.</p>
+                </div>
+                 <div class="flex justify-end gap-4 mt-6">
+                    <button type="button" id="cancel-goal" class="px-6 py-2 border border-slate-600 rounded-lg font-semibold hover:bg-slate-700 text-slate-300">Cancelar</button>
+                    <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700">Salvar Meta</button>
+                </div>
+             </form>
         </div>
     </div>
     
@@ -415,8 +570,8 @@
             onSnapshot,
             orderBy,
             limit,
-            writeBatch, // NOVO: Para operações em lote
-            Timestamp // NOVO: Para datas do Firestore
+            writeBatch,
+            Timestamp
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Garante que o script principal só rode após o carregamento completo do DOM
@@ -426,14 +581,14 @@
             // ATENÇÃO: Substitua o objeto abaixo pelas credenciais do seu projeto no Firebase.
             // =================================================================================
            const firebaseConfig = {
- apiKey: "AIzaSyC5bC8DJiJIFddpnrFcRkeVILiMyQ-4iJs",
- authDomain: "fintrack-f8302.firebaseapp.com",
- projectId: "fintrack-f8302",
- storageBucket: "fintrack-f8302.firebasestorage.app",
- messagingSenderId: "888846208929",
- appId: "1:888846208929:web:d131163e099a5e79bb45e0",
- measurementId: "G-KSVWFJ8F09"
-};
+             apiKey: "AIzaSyC5bC8DJiJIFddpnrFcRkeVILiMyQ-4iJs",
+             authDomain: "fintrack-f8302.firebaseapp.com",
+             projectId: "fintrack-f8302",
+             storageBucket: "fintrack-f8302.firebasestorage.app",
+             messagingSenderId: "888846208929",
+             appId: "1:888846208929:web:d131163e099a5e79bb45e0",
+             measurementId: "G-KSVWFJ8F09"
+           };
             
             // Inicializa o Firebase
             const app = initializeApp(firebaseConfig);
@@ -448,28 +603,31 @@
                 currentUser: null,
                 transactions: [],
                 categories: [],
+                goals: [],
+                accounts: [], // NOVO: Estado para as contas
                 filters: {
                     period: 'current_month',
                     startDate: '',
                     endDate: '',
                     type: 'all',
                     category: 'all',
+                    account: 'all', // NOVO: Filtro de conta
                     text: ''
                 },
                 listeners: {
                     transactions: null,
                     categories: null,
+                    goals: null,
+                    accounts: null, // NOVO: Listener para contas
                 },
                 charts: {
                     balanceTrend: null,
                     monthlyTrend: null,
                     expensePie: null,
                 },
-                // NOVO: Flag para controlar a checagem de recorrências
                 hasCheckedRecurring: false
             };
             
-            // NOVO: Keywords para sugestão automática de categorias
             const categoryKeywords = {
                 'Alimentação': ['restaurante', 'ifood', 'lanche', 'almoço', 'jantar', 'mercado', 'supermercado', 'padaria', 'delivery'],
                 'Transporte': ['uber', '99', 'gasolina', 'combustível', 'estacionamento', 'metrô', 'ônibus', 'passagem'],
@@ -547,7 +705,6 @@
                     authScreen.classList.remove('hidden');
                     appScreen.classList.add('hidden');
                     detachListeners();
-                    // NOVO: Reseta a flag de checagem de recorrência no logout
                     AppState.hasCheckedRecurring = false;
                 }
                 feather.replace();
@@ -609,17 +766,26 @@
             function detachListeners() {
                 if (AppState.listeners.transactions) AppState.listeners.transactions();
                 if (AppState.listeners.categories) AppState.listeners.categories();
+                if (AppState.listeners.goals) AppState.listeners.goals();
+                if (AppState.listeners.accounts) AppState.listeners.accounts(); // NOVO
             }
 
             function attachListeners() {
                 if (!AppState.currentUser) return;
                 detachListeners();
 
-                // NOVO: Verifica e gera transações recorrentes
                 if (!AppState.hasCheckedRecurring) {
                     checkAndGenerateRecurringTransactions();
                     AppState.hasCheckedRecurring = true;
                 }
+                
+                // NOVO: Listener para contas
+                const accountsQuery = query(collection(db, `users/${AppState.currentUser.uid}/accounts`), orderBy("name"));
+                AppState.listeners.accounts = onSnapshot(accountsQuery, (snapshot) => {
+                    AppState.accounts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    updateFilterAccountDropdown();
+                    renderApp();
+                });
 
                 const categoriesQuery = query(collection(db, `users/${AppState.currentUser.uid}/categories`), orderBy("name"));
                 AppState.listeners.categories = onSnapshot(categoriesQuery, (snapshot) => {
@@ -635,15 +801,126 @@
                     AppState.transactions = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
                     renderApp();
                 });
+
+                const goalsQuery = query(collection(db, `users/${AppState.currentUser.uid}/goals`), orderBy("targetDate", "asc"));
+                AppState.listeners.goals = onSnapshot(goalsQuery, (snapshot) => {
+                    AppState.goals = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                    renderApp();
+                });
             }
 
             function renderApp() {
                 if (!AppState.currentUser) return;
                 const filteredTransactions = applyFilters(AppState.transactions);
+                
+                renderAccounts(); // NOVO
                 renderTransactions(filteredTransactions);
                 updateDashboard(AppState.transactions, filteredTransactions);
+                renderGoals(AppState.transactions);
                 feather.replace();
             }
+            
+            // --- CONTAS (NOVA FUNCIONALIDADE) ---
+            function renderAccounts() {
+                const container = document.getElementById('accounts-container');
+                const noAccountsMsg = document.getElementById('no-accounts-msg');
+                const totalBalanceEl = document.getElementById('total-balance-all-accounts');
+
+                if (AppState.accounts.length === 0) {
+                    container.innerHTML = '';
+                    noAccountsMsg.classList.remove('hidden');
+                    totalBalanceEl.textContent = 'Saldo Total: R$ 0,00';
+                    return;
+                }
+                
+                noAccountsMsg.classList.add('hidden');
+                
+                let totalBalanceAll = 0;
+
+                container.innerHTML = AppState.accounts.map(account => {
+                    let currentBalance = account.initialBalance;
+                    AppState.transactions.forEach(tx => {
+                        if (tx.type === 'income' && tx.accountId === account.id) {
+                            currentBalance += tx.amount;
+                        } else if (tx.type === 'expense' && tx.accountId === account.id) {
+                            currentBalance -= tx.amount;
+                        } else if (tx.type === 'transfer') {
+                            if (tx.sourceAccountId === account.id) currentBalance -= tx.amount;
+                            if (tx.destinationAccountId === account.id) currentBalance += tx.amount;
+                        }
+                    });
+                    
+                    totalBalanceAll += currentBalance;
+                    
+                    return `
+                        <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
+                            <div class="flex justify-between items-center">
+                                <div>
+                                    <p class="font-bold text-white">${account.name}</p>
+                                    <p class="text-sm text-slate-400">${account.type}</p>
+                                </div>
+                                <p class="text-lg font-semibold ${currentBalance >= 0 ? 'text-green-400' : 'text-red-400'}">${formatCurrency(currentBalance)}</p>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                totalBalanceEl.textContent = `Saldo Total: ${formatCurrency(totalBalanceAll)}`;
+            }
+
+            function renderAccountListInModal() {
+                 const listContainer = document.getElementById('account-list');
+                 if (AppState.accounts.length === 0) {
+                    listContainer.innerHTML = `<p class="text-slate-500 text-center">Nenhuma conta encontrada.</p>`;
+                    return;
+                 }
+                 listContainer.innerHTML = AppState.accounts.map(account => `
+                    <div class="flex justify-between items-center p-2 bg-slate-700 rounded-lg">
+                        <div>
+                            <span class="font-medium text-slate-200">${account.name}</span>
+                            <span class="text-xs text-slate-400 ml-2">(${formatCurrency(account.initialBalance)})</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <button data-id="${account.id}" class="edit-account-btn text-slate-500 hover:text-purple-400 transition-colors"><i data-feather="edit" class="w-4 h-4"></i></button>
+                            <button data-id="${account.id}" class="delete-account-btn text-slate-500 hover:text-red-500 transition-colors"><i data-feather="trash-2" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>
+                 `).join('');
+                 feather.replace();
+            }
+            
+            document.getElementById('account-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const id = form['account-id'].value;
+                const name = form['account-name'].value.trim();
+
+                if (!name) {
+                    showToast('O nome da conta é obrigatório.', true);
+                    return;
+                }
+
+                const accountData = {
+                    name: name,
+                    type: form['account-type'].value,
+                    initialBalance: parseFloat(form['account-initial-balance'].value) || 0,
+                };
+                
+                try {
+                    if (id) {
+                        await updateDoc(doc(db, `users/${AppState.currentUser.uid}/accounts`, id), accountData);
+                        showToast('Conta atualizada com sucesso!');
+                    } else {
+                        await addDoc(collection(db, `users/${AppState.currentUser.uid}/accounts`), accountData);
+                        showToast('Conta adicionada com sucesso!');
+                    }
+                    resetAccountForm();
+                } catch(error) {
+                    console.error("Erro ao salvar conta:", error);
+                    showToast('Erro ao salvar conta.', true);
+                }
+            });
+
 
             // --- CATEGORIAS ---
             function renderCategoryList() {
@@ -657,6 +934,7 @@
                         </div>
                     </div>
                 `).join('');
+                feather.replace();
             }
 
             document.getElementById('category-form').addEventListener('submit', async (e) => {
@@ -685,18 +963,37 @@
                 
                 noTransactionsMsg.classList.add('hidden');
                 tbody.innerHTML = transactions.map(tx => {
-                    const category = AppState.categories.find(c => c.id === tx.categoryId);
-                    const isIncome = tx.type === 'income';
+                    let descriptionHtml;
+                    let amountHtml;
+                    let categoryName = 'N/A';
+
+                    if (tx.type === 'transfer') {
+                        const sourceAccount = AppState.accounts.find(a => a.id === tx.sourceAccountId);
+                        const destAccount = AppState.accounts.find(a => a.id === tx.destinationAccountId);
+                        descriptionHtml = `
+                            <p class="font-semibold text-white">${tx.description}</p>
+                            <p class="text-sm text-purple-400">${sourceAccount?.name || 'N/A'} → ${destAccount?.name || 'N/A'}</p>
+                        `;
+                        amountHtml = `<span class="text-blue-400">${formatCurrency(tx.amount)}</span>`;
+                        categoryName = 'Transferência';
+                    } else {
+                        const account = AppState.accounts.find(a => a.id === tx.accountId);
+                        const category = AppState.categories.find(c => c.id === tx.categoryId);
+                        const isIncome = tx.type === 'income';
+
+                        descriptionHtml = `
+                            <p class="font-semibold text-white">${tx.description}</p>
+                            <p class="text-sm text-slate-400">${account?.name || 'N/A'}</p>
+                        `;
+                        amountHtml = `<span class="${isIncome ? 'text-green-400' : 'text-red-400'}">${isIncome ? '+' : '-'} ${formatCurrency(tx.amount)}</span>`;
+                        categoryName = category?.name || 'Sem categoria';
+                    }
+
                     return `
                         <tr class="border-b border-slate-700 hover:bg-slate-700/50">
-                            <td class="p-3">
-                                <p class="font-semibold text-white">${tx.description}</p>
-                                <p class="text-sm text-slate-400 md:hidden">${category?.name || 'Sem categoria'}</p>
-                            </td>
-                            <td class="p-3 font-medium ${isIncome ? 'text-green-400' : 'text-red-400'}">
-                                ${isIncome ? '+' : '-'} ${formatCurrency(tx.amount)}
-                            </td>
-                            <td class="p-3 text-slate-400 hidden md:table-cell">${category?.name || 'Sem categoria'}</td>
+                            <td class="p-3">${descriptionHtml}</td>
+                            <td class="p-3 font-medium">${amountHtml}</td>
+                            <td class="p-3 text-slate-400 hidden md:table-cell">${categoryName}</td>
                             <td class="p-3 text-slate-400 hidden md:table-cell">${formatDate(tx.date)}</td>
                             <td class="p-3">
                                 <div class="flex gap-2 justify-end">
@@ -707,31 +1004,42 @@
                         </tr>
                     `;
                 }).join('');
+                feather.replace();
             }
             
             document.getElementById('transaction-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
                 const form = e.target;
                 const id = form['transaction-id'].value;
+                const type = form['transaction-type'].value;
                 const isRecurring = form['is-recurring'].checked;
 
-                const transactionData = {
-                    type: form['transaction-type'].value,
+                let transactionData = {
                     amount: parseFloat(form['transaction-amount'].value),
                     description: form['transaction-description'].value,
-                    categoryId: form['transaction-category'].value,
                     date: form['transaction-date'].value,
+                    type: type,
                 };
+
+                if (type === 'transfer') {
+                    transactionData.sourceAccountId = form['transfer-source-account'].value;
+                    transactionData.destinationAccountId = form['transfer-destination-account'].value;
+                    if (transactionData.sourceAccountId === transactionData.destinationAccountId) {
+                        showToast("A conta de origem e destino não podem ser a mesma.", true);
+                        return;
+                    }
+                } else {
+                    transactionData.accountId = form['transaction-account'].value;
+                    transactionData.categoryId = form['transaction-category'].value;
+                }
                 
-                // Validação
-                if (!transactionData.type || !transactionData.amount || !transactionData.description || !transactionData.categoryId || !transactionData.date) {
-                    showToast("Por favor, preencha todos os campos principais.", true);
+                if (!transactionData.type || !transactionData.amount || !transactionData.description || !transactionData.date || (type !== 'transfer' && !transactionData.accountId) || (type === 'transfer' && (!transactionData.sourceAccountId || !transactionData.destinationAccountId))) {
+                    showToast("Por favor, preencha todos os campos obrigatórios.", true);
                     return;
                 }
 
                 try {
-                    // Se for recorrente, salva o modelo de recorrência
-                    if (isRecurring && !id) { // Só cria recorrência para novas transações
+                    if (isRecurring && !id) { 
                         const recurringData = {
                             ...transactionData,
                             frequency: form['recurring-frequency'].value,
@@ -743,7 +1051,6 @@
                         showToast('Lançamento recorrente agendado!');
                     }
 
-                    // Salva ou atualiza a transação individual
                     const action = id 
                         ? updateDoc(doc(db, `users/${AppState.currentUser.uid}/transactions`, id), transactionData)
                         : addDoc(collection(db, `users/${AppState.currentUser.uid}/transactions`), transactionData);
@@ -760,8 +1067,6 @@
             
             // --- DASHBOARD E GRÁFICOS ---
             function updateDashboard(allTransactions, filteredTransactions) {
-                const today = new Date();
-                
                 const totalIncome = filteredTransactions.filter(tx => tx.type === 'income').reduce((sum, tx) => sum + tx.amount, 0);
                 const totalExpenses = filteredTransactions.filter(tx => tx.type === 'expense').reduce((sum, tx) => sum + tx.amount, 0);
 
@@ -849,7 +1154,7 @@
                         if (monthDiff >= 0 && monthDiff < 6) {
                             if (tx.type === 'income') {
                                 data.incomes[monthDiff] += tx.amount;
-                            } else {
+                            } else if (tx.type === 'expense') {
                                 data.expenses[monthDiff] += tx.amount;
                             }
                         }
@@ -887,13 +1192,26 @@
                 }
 
                 const sortedTx = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
-                let cumulativeBalance = 0;
-                const balanceData = sortedTx.map(tx => {
-                    cumulativeBalance += tx.type === 'income' ? tx.amount : -tx.amount;
-                    return { x: new Date(tx.date + 'T00:00:00'), y: cumulativeBalance };
+                let cumulativeBalance = AppState.accounts.reduce((sum, acc) => sum + acc.initialBalance, 0);
+
+                const balanceDataByDate = sortedTx.reduce((acc, tx) => {
+                    let change = 0;
+                    if (tx.type === 'income') change = tx.amount;
+                    else if (tx.type === 'expense') change = -tx.amount;
+                    
+                    acc[tx.date] = (acc[tx.date] || 0) + change;
+                    return acc;
+                }, {});
+
+                const dates = Object.keys(balanceDataByDate).sort();
+                const balanceData = dates.map(date => {
+                    cumulativeBalance += balanceDataByDate[date];
+                    return { x: new Date(date + 'T00:00:00'), y: cumulativeBalance };
                 });
 
                 const n = balanceData.length;
+                if (n < 2) return; // Not enough data for trend
+
                 const x = balanceData.map((_, i) => i);
                 const y = balanceData.map(d => d.y);
                 const sumX = x.reduce((a, b) => a + b, 0);
@@ -910,7 +1228,8 @@
                 for (let i = 1; i <= 30; i++) {
                     const futureDate = new Date(lastDate);
                     futureDate.setDate(lastDate.getDate() + i);
-                    const predictedBalance = slope * (n -1 + i) + intercept;
+                    const timeDiff = (futureDate - balanceData[0].x) / (1000 * 60 * 60 * 24); // days from start
+                    const predictedBalance = slope * (n - 1 + i) + intercept;
                     predictionData.push({ x: futureDate, y: predictedBalance });
                 }
 
@@ -937,11 +1256,11 @@
             // LÓGICA DE FILTROS
             // =================================================================================
             function applyFilters(transactions) {
-                const { period, startDate, endDate, type, category, text } = AppState.filters;
+                const { period, startDate, endDate, type, category, account, text } = AppState.filters;
                 let filtered = [...transactions];
 
                 // Filtro de Período
-                if (period !== 'all') {
+                if (period !== 'all_time') {
                     let start, end;
                     const today = new Date();
                     if (period === 'current_month') {
@@ -971,6 +1290,11 @@
                 if (category !== 'all') {
                     filtered = filtered.filter(tx => tx.categoryId === category);
                 }
+                
+                // NOVO: Filtro de Conta
+                if (account !== 'all') {
+                    filtered = filtered.filter(tx => tx.accountId === account || tx.sourceAccountId === account || tx.destinationAccountId === account);
+                }
 
                 // Filtro de Texto
                 if (text) {
@@ -978,6 +1302,15 @@
                 }
                 
                 return filtered;
+            }
+            
+            // NOVO: Atualiza o dropdown de filtro de contas
+            function updateFilterAccountDropdown() {
+                const select = document.getElementById('filter-account');
+                select.innerHTML = '<option value="all">Todas as Contas</option>';
+                AppState.accounts.forEach(a => {
+                    select.innerHTML += `<option value="${a.id}">${a.name}</option>`;
+                });
             }
 
             function updateFilterCategoryDropdown() {
@@ -997,6 +1330,7 @@
             document.getElementById('filter-end-date').addEventListener('change', (e) => { AppState.filters.endDate = e.target.value; renderApp(); });
             document.getElementById('filter-type').addEventListener('change', (e) => { AppState.filters.type = e.target.value; renderApp(); });
             document.getElementById('filter-category').addEventListener('change', (e) => { AppState.filters.category = e.target.value; renderApp(); });
+            document.getElementById('filter-account').addEventListener('change', (e) => { AppState.filters.account = e.target.value; renderApp(); }); // NOVO
             document.getElementById('filter-text').addEventListener('input', (e) => { AppState.filters.text = e.target.value; renderApp(); });
 
 
@@ -1014,12 +1348,26 @@
                 modal.classList.remove('open', 'opacity-100');
                 setTimeout(() => modal.classList.add('hidden'), 300);
             };
+            
+            function openAccountModal() {
+                resetAccountForm();
+                renderAccountListInModal();
+                openModal('account-modal');
+            }
+            
+            function resetAccountForm() {
+                const form = document.getElementById('account-form');
+                form.reset();
+                form['account-id'].value = '';
+                document.getElementById('account-form-title').textContent = 'Adicionar Nova Conta';
+                document.getElementById('account-initial-balance').disabled = false;
+                document.getElementById('cancel-account-edit').classList.add('hidden');
+            }
 
             function openTransactionModal(transaction = null) {
                 const form = document.getElementById('transaction-form');
                 form.reset();
                 document.getElementById('transaction-id').value = '';
-                // NOVO: Resetar e esconder opções de recorrência
                 document.getElementById('is-recurring').checked = false;
                 document.getElementById('recurring-options').classList.add('hidden');
                 document.getElementById('is-recurring').disabled = false;
@@ -1031,17 +1379,39 @@
                     document.getElementById('transaction-description').value = transaction.description;
                     document.getElementById('transaction-date').value = transaction.date;
                     setTransactionType(transaction.type);
-                    document.getElementById('transaction-category').value = transaction.categoryId;
-                    // NOVO: Desabilitar recorrência na edição
+                    
+                    if(transaction.type === 'transfer') {
+                        document.getElementById('transfer-source-account').value = transaction.sourceAccountId;
+                        document.getElementById('transfer-destination-account').value = transaction.destinationAccountId;
+                    } else {
+                        document.getElementById('transaction-account').value = transaction.accountId;
+                        document.getElementById('transaction-category').value = transaction.categoryId;
+                    }
+                    
                     document.getElementById('is-recurring').disabled = true;
+                    document.getElementById('recurring-section').classList.add('hidden');
                 } else {
                     document.getElementById('modal-title').textContent = 'Adicionar Transação';
                     document.getElementById('transaction-date').valueAsDate = new Date();
+                    document.getElementById('recurring-section').classList.remove('hidden');
                     setTransactionType('expense');
                 }
                 openModal('transaction-modal');
             }
             
+            function updateTransactionAccountDropdowns() {
+                const selects = [
+                    document.getElementById('transaction-account'),
+                    document.getElementById('transfer-source-account'),
+                    document.getElementById('transfer-destination-account')
+                ];
+                const optionsHtml = AppState.accounts.map(a => `<option value="${a.id}">${a.name}</option>`).join('');
+                selects.forEach(select => {
+                    const firstOption = select.querySelector('option[value=""]');
+                    select.innerHTML = (firstOption ? firstOption.outerHTML : '') + optionsHtml;
+                });
+            }
+
             function updateTransactionCategoryDropdown() {
                 const select = document.getElementById('transaction-category');
                 const currentType = document.getElementById('transaction-type').value || 'expense';
@@ -1053,31 +1423,57 @@
             
             function setTransactionType(type) {
                 document.getElementById('transaction-type').value = type;
-                const incomeBtn = document.getElementById('type-income');
-                const expenseBtn = document.getElementById('type-expense');
+                
+                const typeButtons = {
+                    income: document.getElementById('type-income'),
+                    expense: document.getElementById('type-expense'),
+                    transfer: document.getElementById('type-transfer'),
+                };
+                
                 const activeClasses = ['bg-purple-600', 'text-white', 'border-purple-500'];
                 const inactiveClasses = ['bg-slate-700', 'text-slate-300', 'border-slate-600'];
-                
-                (type === 'income' ? [incomeBtn, expenseBtn] : [expenseBtn, incomeBtn]).forEach((btn, i) => {
-                    btn.classList.add(...(i === 0 ? activeClasses : inactiveClasses));
-                    btn.classList.remove(...(i === 0 ? inactiveClasses : activeClasses));
+
+                Object.keys(typeButtons).forEach(key => {
+                    const btn = typeButtons[key];
+                    if (key === type) {
+                        btn.classList.add(...activeClasses);
+                        btn.classList.remove(...inactiveClasses);
+                    } else {
+                        btn.classList.add(...inactiveClasses);
+                        btn.classList.remove(...activeClasses);
+                    }
                 });
-                updateTransactionCategoryDropdown();
+
+                const incomeExpenseFields = document.getElementById('income-expense-fields');
+                const transferFields = document.getElementById('transfer-fields');
+                const recurringSection = document.getElementById('recurring-section');
+                
+                if (type === 'transfer') {
+                    incomeExpenseFields.classList.add('hidden');
+                    transferFields.classList.remove('hidden');
+                    recurringSection.classList.add('hidden');
+                } else {
+                    incomeExpenseFields.classList.remove('hidden');
+                    transferFields.classList.add('hidden');
+                    recurringSection.classList.remove('hidden');
+                    updateTransactionCategoryDropdown();
+                }
+                updateTransactionAccountDropdowns();
             }
             
             // Event Listeners Globais para Ações
             document.addEventListener('click', async (e) => {
                 // Ações de Transação
-                const editBtn = e.target.closest('.edit-transaction-btn');
-                if (editBtn) {
-                    const txToEdit = AppState.transactions.find(tx => tx.id === editBtn.dataset.id);
+                const editTxBtn = e.target.closest('.edit-transaction-btn');
+                if (editTxBtn) {
+                    const txToEdit = AppState.transactions.find(tx => tx.id === editTxBtn.dataset.id);
                     if (txToEdit) openTransactionModal(txToEdit);
                 }
 
-                const deleteBtn = e.target.closest('.delete-transaction-btn');
-                if (deleteBtn && confirm('Tem certeza que deseja excluir esta transação?')) {
+                const deleteTxBtn = e.target.closest('.delete-transaction-btn');
+                if (deleteTxBtn && confirm('Tem certeza que deseja excluir esta transação?')) {
                     try {
-                        await deleteDoc(doc(db, `users/${AppState.currentUser.uid}/transactions`, deleteBtn.dataset.id));
+                        await deleteDoc(doc(db, `users/${AppState.currentUser.uid}/transactions`, deleteTxBtn.dataset.id));
                         showToast('Transação excluída.');
                     } catch (error) { showToast('Erro ao excluir transação.', true); }
                 }
@@ -1090,16 +1486,83 @@
                         showToast('Categoria excluída.');
                     } catch (error) { showToast('Erro ao excluir categoria.', true); }
                 }
+                
+                // NOVO: Ações de Conta
+                const editAccountBtn = e.target.closest('.edit-account-btn');
+                if (editAccountBtn) {
+                    const accountToEdit = AppState.accounts.find(a => a.id === editAccountBtn.dataset.id);
+                    if (accountToEdit) {
+                        const form = document.getElementById('account-form');
+                        form['account-id'].value = accountToEdit.id;
+                        form['account-name'].value = accountToEdit.name;
+                        form['account-type'].value = accountToEdit.type;
+                        form['account-initial-balance'].value = accountToEdit.initialBalance;
+                        form['account-initial-balance'].disabled = true;
+                        document.getElementById('account-form-title').textContent = 'Editar Conta';
+                        document.getElementById('cancel-account-edit').classList.remove('hidden');
+                        form['account-name'].focus();
+                    }
+                }
+                
+                const deleteAccountBtn = e.target.closest('.delete-account-btn');
+                if (deleteAccountBtn && confirm('Atenção: Excluir esta conta irá apagar TODAS as transações associadas a ela. Deseja continuar?')) {
+                    try {
+                        const accountId = deleteAccountBtn.dataset.id;
+                        
+                        const batch = writeBatch(db);
+                        
+                        // Encontrar e deletar transações relacionadas
+                        const q1 = query(collection(db, `users/${AppState.currentUser.uid}/transactions`), where('accountId', '==', accountId));
+                        const q2 = query(collection(db, `users/${AppState.currentUser.uid}/transactions`), where('sourceAccountId', '==', accountId));
+                        const q3 = query(collection(db, `users/${AppState.currentUser.uid}/transactions`), where('destinationAccountId', '==', accountId));
+
+                        const [snap1, snap2, snap3] = await Promise.all([getDocs(q1), getDocs(q2), getDocs(q3)]);
+                        
+                        snap1.forEach(doc => batch.delete(doc.ref));
+                        snap2.forEach(doc => batch.delete(doc.ref));
+                        snap3.forEach(doc => batch.delete(doc.ref));
+
+                        // Deletar a conta
+                        const accountRef = doc(db, `users/${AppState.currentUser.uid}/accounts`, accountId);
+                        batch.delete(accountRef);
+                        
+                        await batch.commit();
+                        showToast('Conta e transações associadas foram excluídas.');
+
+                    } catch(error) {
+                        console.error('Erro ao excluir conta:', error);
+                        showToast('Erro ao excluir a conta.', true);
+                    }
+                }
+
+                // Ações de Meta
+                const editGoalBtn = e.target.closest('.edit-goal-btn');
+                if (editGoalBtn) {
+                    const goalToEdit = AppState.goals.find(g => g.id === editGoalBtn.dataset.id);
+                    if (goalToEdit) openGoalModal(goalToEdit);
+                }
+
+                const deleteGoalBtn = e.target.closest('.delete-goal-btn');
+                if (deleteGoalBtn && confirm('Tem certeza que deseja excluir esta meta?')) {
+                    try {
+                        await deleteDoc(doc(db, `users/${AppState.currentUser.uid}/goals`, deleteGoalBtn.dataset.id));
+                        showToast('Meta excluída.');
+                    } catch (error) { showToast('Erro ao excluir meta.', true); }
+                }
             });
 
             document.getElementById('add-transaction-btn').addEventListener('click', () => openTransactionModal());
             document.getElementById('cancel-transaction').addEventListener('click', () => closeModal('transaction-modal'));
             document.getElementById('type-income').addEventListener('click', () => setTransactionType('income'));
             document.getElementById('type-expense').addEventListener('click', () => setTransactionType('expense'));
+            document.getElementById('type-transfer').addEventListener('click', () => setTransactionType('transfer'));
             document.getElementById('manage-categories-btn').addEventListener('click', () => openModal('category-modal'));
             document.getElementById('close-category-modal').addEventListener('click', () => closeModal('category-modal'));
+            document.getElementById('manage-accounts-btn').addEventListener('click', () => openAccountModal()); // NOVO
+            document.getElementById('close-account-modal').addEventListener('click', () => closeModal('account-modal')); // NOVO
+            document.getElementById('cancel-account-edit').addEventListener('click', resetAccountForm); // NOVO
 
-            // NOVO: Listener para a checkbox de recorrência
+
             document.getElementById('is-recurring').addEventListener('change', (e) => {
                 document.getElementById('recurring-options').classList.toggle('hidden', !e.target.checked);
             });
@@ -1141,12 +1604,22 @@
                 
                 const transactionsToExport = applyFilters(AppState.transactions);
                 const tableData = transactionsToExport.map(tx => {
-                    const category = AppState.categories.find(c => c.id === tx.categoryId);
+                    let category = 'N/A';
+                    let value = formatCurrency(tx.amount);
+                    if (tx.type === 'income') {
+                        category = AppState.categories.find(c => c.id === tx.categoryId)?.name || 'N/A';
+                        value = `+${value}`;
+                    } else if (tx.type === 'expense') {
+                         category = AppState.categories.find(c => c.id === tx.categoryId)?.name || 'N/A';
+                         value = `-${value}`;
+                    } else if (tx.type === 'transfer') {
+                        category = 'Transferência';
+                    }
                     return [
                         tx.description,
                         formatDate(tx.date),
-                        category ? category.name : 'N/A',
-                        (tx.type === 'income' ? '+' : '-') + formatCurrency(tx.amount)
+                        category,
+                        value
                     ];
                 });
 
@@ -1168,16 +1641,29 @@
                     return;
                 }
                 showToast('Gerando seu arquivo CSV...');
-                const headers = ['Data', 'Descrição', 'Categoria', 'Tipo', 'Valor'];
+                const headers = ['Data', 'Descrição', 'Conta', 'Categoria', 'Tipo', 'Valor'];
                 const csvRows = [headers.join(',')];
                 transactionsToExport.forEach(tx => {
-                    const category = AppState.categories.find(c => c.id === tx.categoryId);
+                    let accountName = 'N/A', categoryName = 'N/A', type = '', value = tx.amount;
+                    if (tx.type === 'income' || tx.type === 'expense') {
+                        accountName = AppState.accounts.find(a => a.id === tx.accountId)?.name || 'N/A';
+                        categoryName = AppState.categories.find(c => c.id === tx.categoryId)?.name || 'N/A';
+                        type = tx.type === 'income' ? 'Receita' : 'Despesa';
+                    } else if (tx.type === 'transfer') {
+                        const source = AppState.accounts.find(a => a.id === tx.sourceAccountId)?.name || 'N/A';
+                        const dest = AppState.accounts.find(a => a.id === tx.destinationAccountId)?.name || 'N/A';
+                        accountName = `${source} -> ${dest}`;
+                        categoryName = 'Transferência';
+                        type = 'Transferência';
+                    }
+
                     const row = [
                         tx.date,
                         `"${tx.description.replace(/"/g, '""')}"`,
-                        category ? category.name : 'N/A',
-                        tx.type === 'income' ? 'Receita' : 'Despesa',
-                        tx.amount
+                        `"${accountName}"`,
+                        `"${categoryName}"`,
+                        type,
+                        value
                     ];
                     csvRows.push(row.join(','));
                 });
@@ -1196,7 +1682,7 @@
             });
 
             // =================================================================================
-            // NOVO: LÓGICA DAS NOVAS FEATURES
+            // LÓGICA DAS NOVAS FEATURES
             // =================================================================================
 
             // --- 1. CLASSIFICAÇÃO AUTOMÁTICA ---
@@ -1208,19 +1694,17 @@
                 for (const categoryName in categoryKeywords) {
                     const keywords = categoryKeywords[categoryName];
                     if (keywords.some(keyword => lowerDesc.includes(keyword))) {
-                        // Encontra a categoria do usuário que corresponde ao nome e tipo
                         const userCategory = AppState.categories.find(c => 
                             c.name.toLowerCase() === categoryName.toLowerCase() && c.type === transactionType
                         );
 
                         if (userCategory) {
                             document.getElementById('transaction-category').value = userCategory.id;
-                            break; // Para na primeira correspondência
+                            break; 
                         }
                     }
                 }
             }
-            // Adiciona o listener ao campo de descrição
             document.getElementById('transaction-description').addEventListener('blur', (e) => {
                 suggestCategory(e.target.value);
             });
@@ -1248,18 +1732,17 @@
                     querySnapshot.forEach(docSnap => {
                         const recurringTx = { id: docSnap.id, ...docSnap.data() };
                         
-                        // Gera a nova transação
                         const newTransactionData = {
                             amount: recurringTx.amount,
                             categoryId: recurringTx.categoryId,
-                            date: recurringTx.nextDueDate.toDate().toISOString().slice(0, 10), // Converte Timestamp para 'YYYY-MM-DD'
+                            accountId: recurringTx.accountId, // Adicionado
+                            date: recurringTx.nextDueDate.toDate().toISOString().slice(0, 10),
                             description: recurringTx.description,
                             type: recurringTx.type,
                         };
                         const newTransactionRef = doc(collection(db, `users/${AppState.currentUser.uid}/transactions`));
                         batch.set(newTransactionRef, newTransactionData);
 
-                        // Calcula a próxima data de vencimento
                         let nextDueDate = recurringTx.nextDueDate.toDate();
                         if (recurringTx.frequency === 'weekly') {
                             nextDueDate.setDate(nextDueDate.getDate() + 7);
@@ -1267,9 +1750,7 @@
                             nextDueDate.setMonth(nextDueDate.getMonth() + 1);
                         }
 
-                        // Atualiza o template de recorrência
                         const recurringDocRef = doc(db, `users/${AppState.currentUser.uid}/recurringTransactions`, recurringTx.id);
-                        // Desativa se a próxima data passar da data final
                         if (recurringTx.endDate && nextDueDate > recurringTx.endDate.toDate()) {
                             batch.update(recurringDocRef, { isActive: false });
                         } else {
@@ -1289,6 +1770,156 @@
                 }
             }
 
+            // --- 5. METAS DE ECONOMIA (NOVA FUNCIONALIDADE) ---
+            function renderGoals(allTransactions) {
+                const container = document.getElementById('goals-container');
+                const noGoalsMsg = document.getElementById('no-goals-msg');
+
+                if (AppState.goals.length === 0) {
+                    container.innerHTML = '';
+                    noGoalsMsg.classList.remove('hidden');
+                    return;
+                }
+
+                noGoalsMsg.classList.add('hidden');
+                container.innerHTML = AppState.goals.map(goal => {
+                    const targetDate = goal.targetDate.toDate();
+                    const startOfMonth = new Date(targetDate.getFullYear(), targetDate.getMonth(), 1);
+
+                    const transactionsInPeriod = allTransactions.filter(tx => {
+                        const txDate = new Date(tx.date + 'T00:00:00');
+                        return txDate >= startOfMonth && txDate <= targetDate;
+                    });
+                    
+                    let currentAmount = 0;
+                    let goalTypeText = '';
+                    
+                    if (goal.type === 'savings') {
+                        const incomeInPeriod = transactionsInPeriod.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+                        const expenseInPeriod = transactionsInPeriod.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+                        currentAmount = incomeInPeriod - expenseInPeriod;
+                        goalTypeText = 'Economizado no mês';
+                    } else if (goal.type === 'spendingLimit') {
+                        currentAmount = transactionsInPeriod
+                            .filter(t => t.type === 'expense' && goal.categoryIds.includes(t.categoryId))
+                            .reduce((sum, t) => sum + t.amount, 0);
+                        goalTypeText = 'Gasto no mês';
+                    }
+
+                    const progressPercentage = Math.min(100, (currentAmount / goal.targetAmount) * 100);
+                    const isExceeded = goal.type === 'spendingLimit' && currentAmount > goal.targetAmount;
+
+                    return `
+                        <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <p class="font-bold text-white">${goal.name}</p>
+                                    <p class="text-sm text-slate-400">Até ${targetDate.toLocaleDateString('pt-BR')}</p>
+                                </div>
+                                <div class="flex gap-2">
+                                    <button data-id="${goal.id}" class="edit-goal-btn text-slate-500 hover:text-purple-400"><i data-feather="edit" class="w-4 h-4"></i></button>
+                                    <button data-id="${goal.id}" class="delete-goal-btn text-slate-500 hover:text-red-500"><i data-feather="trash-2" class="w-4 h-4"></i></button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between items-center mb-1 text-sm">
+                                <span class="${isExceeded ? 'text-red-400' : 'text-slate-300'}">${formatCurrency(currentAmount)}</span>
+                                <span class="text-slate-400">/ ${formatCurrency(goal.targetAmount)}</span>
+                            </div>
+                            <div class="w-full bg-slate-600 rounded-full h-2.5">
+                                <div class="${isExceeded ? 'bg-red-500' : 'bg-purple-500'} h-2.5 rounded-full" style="width: ${progressPercentage > 0 ? progressPercentage : 0}%"></div>
+                            </div>
+                            <p class="text-xs text-slate-500 text-right mt-1">${goalTypeText}</p>
+                        </div>
+                    `;
+                }).join('');
+                feather.replace();
+            }
+
+            function openGoalModal(goal = null) {
+                const form = document.getElementById('goal-form');
+                form.reset();
+                document.getElementById('goal-id').value = '';
+                
+                const categoryContainer = document.getElementById('goal-categories-container');
+                const categorySelect = document.getElementById('goal-categories');
+                categorySelect.innerHTML = AppState.categories
+                    .filter(c => c.type === 'expense')
+                    .map(c => `<option value="${c.id}">${c.name}</option>`)
+                    .join('');
+
+                if (goal) {
+                    document.getElementById('goal-modal-title').textContent = 'Editar Meta';
+                    document.getElementById('goal-id').value = goal.id;
+                    document.getElementById('goal-name').value = goal.name;
+                    document.getElementById('goal-target-amount').value = goal.targetAmount;
+                    document.getElementById('goal-target-date').value = goal.targetDate.toDate().toISOString().slice(0, 10);
+                    document.getElementById('goal-type').value = goal.type;
+                    
+                    if (goal.type === 'spendingLimit') {
+                        categoryContainer.classList.remove('hidden');
+                        goal.categoryIds.forEach(id => {
+                            const option = categorySelect.querySelector(`option[value="${id}"]`);
+                            if(option) option.selected = true;
+                        });
+                    } else {
+                        categoryContainer.classList.add('hidden');
+                    }
+                } else {
+                    document.getElementById('goal-modal-title').textContent = 'Nova Meta';
+                    const today = new Date();
+                    const endOfMonth = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+                    document.getElementById('goal-target-date').valueAsDate = endOfMonth;
+                    categoryContainer.classList.add('hidden');
+                }
+                openModal('goal-modal');
+            }
+
+            document.getElementById('goal-type').addEventListener('change', (e) => {
+                document.getElementById('goal-categories-container').classList.toggle('hidden', e.target.value !== 'spendingLimit');
+            });
+
+            document.getElementById('goal-form').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const form = e.target;
+                const id = form['goal-id'].value;
+                const type = form['goal-type'].value;
+
+                let categoryIds = [];
+                if (type === 'spendingLimit') {
+                    categoryIds = Array.from(form['goal-categories'].selectedOptions).map(opt => opt.value);
+                    if (categoryIds.length === 0) {
+                        showToast('Para limite de gastos, você deve selecionar ao menos uma categoria.', true);
+                        return;
+                    }
+                }
+                
+                const goalData = {
+                    name: form['goal-name'].value,
+                    targetAmount: parseFloat(form['goal-target-amount'].value),
+                    targetDate: Timestamp.fromDate(new Date(form['goal-target-date'].value + 'T23:59:59')),
+                    type: type,
+                    categoryIds: categoryIds,
+                    createdAt: id ? undefined : Timestamp.now(), // Don't update createdAt
+                };
+                // Remove undefined properties before saving
+                Object.keys(goalData).forEach(key => goalData[key] === undefined && delete goalData[key]);
+
+                try {
+                    const action = id
+                        ? updateDoc(doc(db, `users/${AppState.currentUser.uid}/goals`, id), goalData)
+                        : addDoc(collection(db, `users/${AppState.currentUser.uid}/goals`), goalData);
+
+                    await action;
+                    showToast(`Meta ${id ? 'atualizada' : 'criada'} com sucesso!`);
+                    closeModal('goal-modal');
+                } catch(error) {
+                    console.error("Erro ao salvar meta:", error);
+                    showToast("Erro ao salvar a meta.", true);
+                }
+            });
+
+            document.getElementById('add-goal-btn').addEventListener('click', () => openGoalModal());
+            document.getElementById('cancel-goal').addEventListener('click', () => closeModal('goal-modal'));
         });
     </script>
 </body>
