@@ -1,0 +1,21 @@
+{
+  "name": "FinanTrack - Seu Gerenciador Financeiro",
+  "short_name": "FinanTrack",
+  "description": "O FinanTrack é uma plataforma inteligente de gestão financeira pessoal e empresarial, desenvolvida para simplificar o controle de receitas, despesas, metas e investimentos.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F172A",
+  "theme_color": "#C084FC",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
