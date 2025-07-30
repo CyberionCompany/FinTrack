@@ -84,10 +84,17 @@
         }
         /* Estilos da SPA */
         .active-link {
-            background-color: #7c3aed; /* purple-600 */
-            color: #ffffff;
-            box-shadow: 0 4px 14px 0 rgb(124 58 237 / 50%);
+            color: #a78bfa; /* purple-400 */
         }
+        /* Estilo para desktop */
+        @media (min-width: 768px) {
+            .active-link {
+                background-color: #7c3aed; /* purple-600 */
+                color: #ffffff;
+                box-shadow: 0 4px 14px 0 rgb(124 58 237 / 50%);
+            }
+        }
+
         .app-page {
             animation: fadeIn 0.3s ease-in-out;
         }
@@ -176,51 +183,48 @@
 
     <div id="app-screen" class="hidden">
         <div class="flex h-screen">
-            <aside id="sidebar" class="w-64 bg-slate-800 border-r border-slate-700 p-4 flex-shrink-0 flex flex-col transition-transform -translate-x-full md:translate-x-0 fixed md:static h-full z-30">
-                <div class="flex items-center gap-2 mb-10">
+            <aside id="sidebar" class="fixed bottom-0 left-0 w-full h-16 bg-slate-800 border-t border-slate-700 z-30 flex flex-row 
+                                        md:static md:h-screen md:w-64 md:flex-col md:border-r md:border-t-0 md:p-4 md:flex-shrink-0">
+                
+                <div class="hidden md:flex items-center gap-2 mb-10">
                     <h1 class="text-2xl font-extrabold text-white">Finan<span class="text-purple-400">Track</span></h1>
                 </div>
-                <nav id="main-nav" class="flex flex-col gap-2">
-                    <a href="#" data-page="dashboard-page" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors">
+
+                <nav id="main-nav" class="w-full flex flex-row justify-around items-center md:flex-col md:w-auto md:items-stretch md:gap-2">
+                    <a href="#" data-page="dashboard-page" class="nav-link flex flex-col items-center justify-center p-1 text-slate-300 hover:text-purple-400 transition-colors md:flex-row md:justify-start md:gap-3 md:px-4 md:py-3 md:rounded-lg md:hover:bg-slate-700">
                         <i data-feather="home" class="w-5 h-5"></i>
-                        <span class="font-medium">Dashboard</span>
+                        <span class="text-xs md:text-base font-medium">Dashboard</span>
                     </a>
-                    <a href="#" data-page="transactions-page" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors">
+                    <a href="#" data-page="transactions-page" class="nav-link flex flex-col items-center justify-center p-1 text-slate-300 hover:text-purple-400 transition-colors md:flex-row md:justify-start md:gap-3 md:px-4 md:py-3 md:rounded-lg md:hover:bg-slate-700">
                         <i data-feather="repeat" class="w-5 h-5"></i>
-                        <span class="font-medium">Transações</span>
+                        <span class="text-xs md:text-base font-medium">Transações</span>
                     </a>
-                    <a href="#" data-page="accounts-page" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors">
+                    <a href="#" data-page="accounts-page" class="nav-link flex flex-col items-center justify-center p-1 text-slate-300 hover:text-purple-400 transition-colors md:flex-row md:justify-start md:gap-3 md:px-4 md:py-3 md:rounded-lg md:hover:bg-slate-700">
                         <i data-feather="credit-card" class="w-5 h-5"></i>
-                        <span class="font-medium">Contas</span>
+                        <span class="text-xs md:text-base font-medium">Contas</span>
                     </a>
-                    <a href="#" data-page="categories-page" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors">
+                    <a href="#" data-page="categories-page" class="nav-link flex flex-col items-center justify-center p-1 text-slate-300 hover:text-purple-400 transition-colors md:flex-row md:justify-start md:gap-3 md:px-4 md:py-3 md:rounded-lg md:hover:bg-slate-700">
                         <i data-feather="tag" class="w-5 h-5"></i>
-                        <span class="font-medium">Categorias</span>
+                        <span class="text-xs md:text-base font-medium">Categorias</span>
                     </a>
-                    <a href="#" data-page="settings-page" class="nav-link flex items-center gap-3 px-4 py-3 rounded-lg text-slate-300 hover:bg-slate-700 transition-colors">
+                    <a href="#" data-page="settings-page" class="nav-link flex flex-col items-center justify-center p-1 text-slate-300 hover:text-purple-400 transition-colors md:flex-row md:justify-start md:gap-3 md:px-4 md:py-3 md:rounded-lg md:hover:bg-slate-700">
                         <i data-feather="settings" class="w-5 h-5"></i>
-                        <span class="font-medium">Configurações</span>
+                        <span class="text-xs md:text-base font-medium">Ajustes</span>
                     </a>
                 </nav>
-                <div class="mt-auto">
+
+                <div class="mt-auto hidden md:block">
                      <span id="user-greeting" class="text-slate-400 hidden md:block text-center text-sm mb-2"></span>
                      <div id="user-avatar-container" class="flex items-center justify-center gap-3 mb-2"></div>
                      <button id="logout-btn" class="w-full flex items-center justify-center gap-2 text-slate-400 hover:bg-red-500/20 hover:text-red-400 transition-colors p-2 rounded-lg" title="Sair">
-                        <i data-feather="log-out" class="w-5 h-5"></i>
-                        <span>Sair</span>
-                    </button>
+                         <i data-feather="log-out" class="w-5 h-5"></i>
+                         <span>Sair</span>
+                     </button>
                 </div>
             </aside>
             
             <div class="flex-1 flex flex-col">
-                <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-20 border-b border-slate-800 p-4 flex justify-between items-center md:hidden">
-                    <h1 class="text-2xl font-extrabold text-white">Finan<span class="text-purple-400">Track</span></h1>
-                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white">
-                        <i data-feather="menu" class="w-6 h-6"></i>
-                    </button>
-                </header>
-                
-                <main id="main-content" class="flex-1 overflow-y-auto p-4 md:p-8">
+                <main id="main-content" class="flex-1 overflow-y-auto p-4 pb-20 md:p-8 md:pb-8">
                     <div id="dashboard-page" class="app-page">
                         <section id="summary" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                             <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex items-center gap-4 fade-in-up" style="animation-delay: 200ms;">
@@ -311,7 +315,7 @@
                                          <label for="filter-end-date" class="text-sm font-medium text-slate-400">Fim</label>
                                          <input type="date" id="filter-end-date" class="w-full mt-1 p-2 bg-slate-700 border border-slate-600 rounded-lg text-white">
                                      </div>
-                                </div>
+                                 </div>
                                 <div>
                                     <label for="filter-type" class="text-sm font-medium text-slate-400">Tipo</label>
                                     <select id="filter-type" class="w-full mt-1 p-2 bg-slate-700 border border-slate-600 rounded-lg text-white">
@@ -415,27 +419,27 @@
                         
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                              <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up">
-                                <h3 class="text-lg font-semibold text-white mb-4">Importar Dados</h3>
-                                <p class="text-slate-400 mb-4">Importe transações a partir de um arquivo CSV ou OFX do seu banco.</p>
-                                <button id="import-statement-btn" class="w-full bg-slate-700 text-slate-200 py-3 px-6 rounded-lg font-semibold hover:bg-slate-600 transition-colors flex items-center justify-center gap-2 border border-slate-600">
-                                    <i data-feather="upload" class="w-5 h-5"></i>
-                                    Importar Extrato
-                                </button>
+                                 <h3 class="text-lg font-semibold text-white mb-4">Importar Dados</h3>
+                                 <p class="text-slate-400 mb-4">Importe transações a partir de um arquivo CSV ou OFX do seu banco.</p>
+                                 <button id="import-statement-btn" class="w-full bg-slate-700 text-slate-200 py-3 px-6 rounded-lg font-semibold hover:bg-slate-600 transition-colors flex items-center justify-center gap-2 border border-slate-600">
+                                     <i data-feather="upload" class="w-5 h-5"></i>
+                                     Importar Extrato
+                                 </button>
                              </div>
                              
                              <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 100ms;">
-                                <h3 class="text-lg font-semibold text-white mb-4">Exportar Dados</h3>
-                                <p class="text-slate-400 mb-4">Gere relatórios das suas transações filtradas em formato PDF ou CSV.</p>
-                                <div class="flex gap-4">
-                                    <button id="export-pdf-btn" class="w-full bg-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center justify-center gap-2 text-sm">
-                                        <i data-feather="file-text" class="w-4 h-4"></i>
-                                        Exportar PDF
-                                    </button>
-                                    <button id="export-csv-btn" class="w-full bg-slate-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-slate-700 transition-colors flex items-center justify-center gap-2 text-sm">
-                                        <i data-feather="file" class="w-4 h-4"></i>
-                                        Exportar CSV
-                                    </button>
-                                </div>
+                                 <h3 class="text-lg font-semibold text-white mb-4">Exportar Dados</h3>
+                                 <p class="text-slate-400 mb-4">Gere relatórios das suas transações filtradas em formato PDF ou CSV.</p>
+                                 <div class="flex gap-4">
+                                     <button id="export-pdf-btn" class="w-full bg-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center justify-center gap-2 text-sm">
+                                         <i data-feather="file-text" class="w-4 h-4"></i>
+                                         Exportar PDF
+                                     </button>
+                                     <button id="export-csv-btn" class="w-full bg-slate-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-slate-700 transition-colors flex items-center justify-center gap-2 text-sm">
+                                         <i data-feather="file" class="w-4 h-4"></i>
+                                         Exportar CSV
+                                     </button>
+                                 </div>
                              </div>
                         </div>
                     </div>
@@ -687,7 +691,7 @@
         </div>
     </div>
     
-    <div id="toast-notification" class="fixed bottom-5 right-5 bg-slate-100 text-slate-800 px-6 py-3 rounded-lg shadow-lg transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3 z-50">
+    <div id="toast-notification" class="fixed bottom-20 md:bottom-5 right-5 bg-slate-100 text-slate-800 px-6 py-3 rounded-lg shadow-lg transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3 z-50">
         <i id="toast-icon" data-feather="check-circle" class="text-green-500"></i>
         <p id="toast-message"></p>
     </div>
@@ -728,7 +732,7 @@
             // =================================================================================
             // CONFIGURAÇÃO DO FIREBASE
             // =================================================================================
-           const firebaseConfig = {
+            const firebaseConfig = {
              apiKey: "AIzaSyC5bC8DJiJIFddpnrFcRkeVILiMyQ-4iJs",
              authDomain: "fintrack-f8302.firebaseapp.com",
              projectId: "fintrack-f8302",
@@ -736,7 +740,7 @@
              messagingSenderId: "888846208929",
              appId: "1:888846208929:web:d131163e099a5e79bb45e0",
              measurementId: "G-KSVWFJ8F09"
-           };
+            };
             
             // Inicializa o Firebase
             const app = initializeApp(firebaseConfig);
@@ -846,7 +850,6 @@
             // =================================================================================
             const pages = document.querySelectorAll('.app-page');
             const navLinks = document.querySelectorAll('.nav-link');
-            const sidebar = document.getElementById('sidebar');
 
             function navigateTo(pageId) {
                 // Esconde todas as páginas
@@ -866,9 +869,6 @@
                     }
                 });
 
-                // Esconde o menu mobile após a navegação
-                sidebar.classList.add('-translate-x-full');
-
                 // Garante que os ícones sejam renderizados na nova página visível
                 feather.replace();
             }
@@ -879,10 +879,6 @@
                     e.preventDefault();
                     navigateTo(link.dataset.page);
                 }
-            });
-
-            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
             });
 
 
