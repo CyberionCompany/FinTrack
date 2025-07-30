@@ -6,24 +6,19 @@
     <title>FinanTrack - Seu Gerenciador Financeiro</title>
       <link rel="manifest" href="manifest.json">
       <meta name="theme-color" content="#0F172A">
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Chart.js para gráficos -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
     
-    <!-- jsPDF e html2canvas para exportar PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://unpkg.com/jspdf-autotable@3.5.23/dist/jspdf.plugin.autotable.js"></script>
     
-    <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Ícones (Feather Icons) -->
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
 
     <style>
@@ -90,10 +85,8 @@
 </head>
 <body class="bg-slate-900 text-slate-300">
 
-    <!-- Tela de Autenticação -->
     <div id="auth-screen" class="min-h-screen flex items-center justify-center p-4 auth-bg">
         <div class="w-full max-w-md bg-slate-800/60 backdrop-blur-sm border border-slate-700 p-8 rounded-2xl shadow-2xl">
-            <!-- Tela de Login -->
             <div id="login-view">
                 <h2 class="text-3xl font-bold text-center text-white mb-2">Bem-vindo de volta!</h2>
                 <p class="text-center text-slate-400 mb-8">Acesse sua conta para continuar.</p>
@@ -127,7 +120,6 @@
                 </p>
             </div>
 
-            <!-- Tela de Cadastro -->
             <div id="signup-view" class="hidden">
                 <h2 class="text-3xl font-bold text-center text-white mb-2">Crie sua conta</h2>
                 <p class="text-center text-slate-400 mb-8">É rápido e fácil.</p>
@@ -151,7 +143,6 @@
                 </p>
             </div>
 
-            <!-- Tela de Reset de Senha -->
             <div id="reset-password-view" class="hidden">
                 <h2 class="text-3xl font-bold text-center text-white mb-2">Redefinir Senha</h2>
                 <p class="text-center text-slate-400 mb-8">Enviaremos um link para o seu e-mail.</p>
@@ -169,15 +160,13 @@
         </div>
     </div>
 
-    <!-- Tela Principal da Aplicação (Dashboard) -->
     <div id="app-screen" class="hidden">
         <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-20 border-b border-slate-800 p-4 flex justify-between items-center">
             <h1 class="text-2xl font-extrabold text-white">Finan<span class="text-purple-400">Track</span></h1>
             <div class="flex items-center gap-4">
                 <span id="user-greeting" class="text-slate-400 hidden md:block"></span>
                 <div id="user-avatar-container" class="flex items-center gap-3">
-                    <!-- Avatar será inserido aqui -->
-                </div>
+                    </div>
                 <button id="logout-btn" class="text-slate-400 hover:text-red-500 transition-colors" title="Sair">
                     <i data-feather="log-out" class="w-6 h-6"></i>
                 </button>
@@ -185,7 +174,6 @@
         </header>
 
         <main class="p-4 md:p-8 max-w-7xl mx-auto">
-            <!-- Ações Principais -->
             <section class="mb-8 flex flex-col sm:flex-row gap-4 fade-in-up" style="animation-delay: 100ms;">
                  <button id="add-transaction-btn" class="w-full sm:w-auto flex-1 bg-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-purple-900/50">
                     <i data-feather="plus" class="w-5 h-5"></i>
@@ -197,7 +185,6 @@
                 </button>
             </section>
 
-            <!-- Resumo Financeiro -->
             <section id="summary" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex items-center gap-4 fade-in-up" style="animation-delay: 200ms;">
                     <div class="bg-green-500/10 p-3 rounded-full"><i data-feather="arrow-up" class="w-8 h-8 text-green-400"></i></div>
@@ -222,7 +209,6 @@
                 </div>
             </section>
 
-            <!-- Gráficos -->
             <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
                 <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 500ms;">
                     <h3 class="text-lg font-semibold mb-4 text-white">Distribuição de Despesas (Filtro)</h3>
@@ -240,8 +226,7 @@
                 </div>
             </section>
 
-             <!-- Filtros -->
-            <section id="filters" class="bg-slate-800 p-4 rounded-2xl border border-slate-700 mb-8 fade-in-up" style="animation-delay: 800ms;">
+             <section id="filters" class="bg-slate-800 p-4 rounded-2xl border border-slate-700 mb-8 fade-in-up" style="animation-delay: 800ms;">
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div>
                         <label for="filter-period" class="text-sm font-medium text-slate-400">Período</label>
@@ -273,8 +258,7 @@
                         <label for="filter-category" class="text-sm font-medium text-slate-400">Categoria</label>
                         <select id="filter-category" class="w-full mt-1 p-2 bg-slate-700 border border-slate-600 rounded-lg text-white">
                             <option value="all">Todas</option>
-                            <!-- Categorias dinâmicas -->
-                        </select>
+                            </select>
                     </div>
                      <div>
                         <label for="filter-text" class="text-sm font-medium text-slate-400">Descrição</label>
@@ -283,17 +267,16 @@
                 </div>
             </section>
 
-            <!-- Lista de Transações -->
             <section id="transactions-list" class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 900ms;">
                 <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
                     <h3 class="text-lg font-semibold text-white">Histórico de Lançamentos</h3>
                     <div class="flex gap-2">
                         <button id="export-pdf-btn" class="bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center gap-2 text-sm">
-                            <i data-feather="file-down" class="w-4 h-4"></i>
+                            <i data-feather="file-text" class="w-4 h-4"></i>
                             Exportar PDF
                         </button>
                         <button id="export-csv-btn" class="bg-slate-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-slate-700 transition-colors flex items-center gap-2 text-sm">
-                            <i data-feather="file-spreadsheet" class="w-4 h-4"></i>
+                            <i data-feather="file" class="w-4 h-4"></i>
                             Exportar CSV
                         </button>
                     </div>
@@ -310,8 +293,7 @@
                             </tr>
                         </thead>
                         <tbody id="transactions-tbody">
-                            <!-- Linhas de transação serão inseridas aqui -->
-                        </tbody>
+                            </tbody>
                     </table>
                      <p id="no-transactions-msg" class="text-center text-slate-500 py-12">
                         <i data-feather="ghost" class="mx-auto w-12 h-12 mb-2"></i>
@@ -322,7 +304,6 @@
         </main>
     </div>
 
-    <!-- Modal de Transação -->
     <div id="transaction-modal" class="modal fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden transition-opacity duration-300 opacity-0">
         <div class="modal-content bg-slate-800 w-full max-w-lg p-8 rounded-2xl shadow-2xl border border-slate-700">
             <h3 id="modal-title" class="text-2xl font-bold mb-6 text-white">Adicionar Transação</h3>
@@ -345,14 +326,37 @@
                 <div class="mb-4">
                     <label for="transaction-category" class="block text-sm font-medium text-slate-400 mb-1">Categoria</label>
                     <select id="transaction-category" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
-                        <!-- Categorias serão inseridas aqui -->
-                    </select>
+                        </select>
                 </div>
-                <div class="mb-6">
+                <div class="mb-4">
                     <label for="transaction-date" class="block text-sm font-medium text-slate-400 mb-1">Data</label>
                     <input type="date" id="transaction-date" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
                 </div>
-                <div class="flex justify-end gap-4">
+                
+                <div class="border-t border-slate-700 my-6"></div>
+                <div class="space-y-4">
+                    <div class="flex items-center">
+                        <input type="checkbox" id="is-recurring" class="h-4 w-4 rounded border-gray-300 text-purple-600 focus:ring-purple-500">
+                        <label for="is-recurring" class="ml-3 block text-sm font-medium text-slate-300">Lançamento Recorrente</label>
+                    </div>
+                    <div id="recurring-options" class="hidden space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="recurring-frequency" class="block text-sm font-medium text-slate-400 mb-1">Frequência</label>
+                                <select id="recurring-frequency" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                                    <option value="weekly">Semanalmente</option>
+                                    <option value="monthly">Mensalmente</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="recurring-end-date" class="block text-sm font-medium text-slate-400 mb-1">Até (opcional)</label>
+                                <input type="date" id="recurring-end-date" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                            </div>
+                        </div>
+                        <p class="text-xs text-slate-500">A primeira transação será criada na data acima. As próximas serão geradas automaticamente.</p>
+                    </div>
+                </div>
+                <div class="flex justify-end gap-4 mt-6">
                     <button type="button" id="cancel-transaction" class="px-6 py-2 border border-slate-600 rounded-lg font-semibold hover:bg-slate-700 text-slate-300">Cancelar</button>
                     <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700">Salvar</button>
                 </div>
@@ -360,7 +364,6 @@
         </div>
     </div>
 
-    <!-- Modal de Categorias -->
     <div id="category-modal" class="modal fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden transition-opacity duration-300 opacity-0">
         <div class="modal-content bg-slate-800 w-full max-w-lg p-8 rounded-2xl shadow-2xl border border-slate-700">
             <div class="flex justify-between items-center mb-6">
@@ -376,18 +379,15 @@
                 <button type="submit" class="w-full sm:w-auto px-4 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700">Adicionar</button>
             </form>
             <div id="category-list" class="space-y-2 max-h-64 overflow-y-auto pr-2">
-                <!-- Lista de categorias será inserida aqui -->
-            </div>
+                </div>
         </div>
     </div>
     
-    <!-- Toast de Notificação -->
     <div id="toast-notification" class="fixed bottom-5 right-5 bg-slate-100 text-slate-800 px-6 py-3 rounded-lg shadow-lg transform translate-y-24 opacity-0 transition-all duration-300 flex items-center gap-3 z-30">
         <i id="toast-icon" data-feather="check-circle" class="text-green-500"></i>
         <p id="toast-message"></p>
     </div>
 
-    <!-- Firebase SDKs -->
     <script type="module">
         // Importe as funções necessárias dos SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -414,7 +414,9 @@
             where,
             onSnapshot,
             orderBy,
-            limit
+            limit,
+            writeBatch, // NOVO: Para operações em lote
+            Timestamp // NOVO: Para datas do Firestore
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Garante que o script principal só rode após o carregamento completo do DOM
@@ -423,14 +425,14 @@
             // CONFIGURAÇÃO DO FIREBASE
             // ATENÇÃO: Substitua o objeto abaixo pelas credenciais do seu projeto no Firebase.
             // =================================================================================
-          const firebaseConfig = {
-  apiKey: "AIzaSyC5bC8DJiJIFddpnrFcRkeVILiMyQ-4iJs",
-  authDomain: "fintrack-f8302.firebaseapp.com",
-  projectId: "fintrack-f8302",
-  storageBucket: "fintrack-f8302.firebasestorage.app",
-  messagingSenderId: "888846208929",
-  appId: "1:888846208929:web:d131163e099a5e79bb45e0",
-  measurementId: "G-KSVWFJ8F09"
+           const firebaseConfig = {
+ apiKey: "AIzaSyC5bC8DJiJIFddpnrFcRkeVILiMyQ-4iJs",
+ authDomain: "fintrack-f8302.firebaseapp.com",
+ projectId: "fintrack-f8302",
+ storageBucket: "fintrack-f8302.firebasestorage.app",
+ messagingSenderId: "888846208929",
+ appId: "1:888846208929:web:d131163e099a5e79bb45e0",
+ measurementId: "G-KSVWFJ8F09"
 };
             
             // Inicializa o Firebase
@@ -462,7 +464,22 @@
                     balanceTrend: null,
                     monthlyTrend: null,
                     expensePie: null,
-                }
+                },
+                // NOVO: Flag para controlar a checagem de recorrências
+                hasCheckedRecurring: false
+            };
+            
+            // NOVO: Keywords para sugestão automática de categorias
+            const categoryKeywords = {
+                'Alimentação': ['restaurante', 'ifood', 'lanche', 'almoço', 'jantar', 'mercado', 'supermercado', 'padaria', 'delivery'],
+                'Transporte': ['uber', '99', 'gasolina', 'combustível', 'estacionamento', 'metrô', 'ônibus', 'passagem'],
+                'Moradia': ['aluguel', 'condomínio', 'iptu', 'luz', 'água', 'gás', 'internet', 'reforma'],
+                'Saúde': ['farmácia', 'médico', 'consulta', 'remédio', 'plano de saúde'],
+                'Lazer': ['cinema', 'show', 'bar', 'festa', 'viagem', 'streaming', 'netflix', 'spotify'],
+                'Salário': ['salário', 'salario', 'pagamento', 'adiantamento'],
+                'Investimentos': ['investimento', 'ações', 'tesouro', 'cripto'],
+                'Compras': ['roupas', 'loja', 'online', 'presente', 'eletrônicos'],
+                'Educação': ['curso', 'livro', 'faculdade', 'escola']
             };
 
             // =================================================================================
@@ -530,6 +547,8 @@
                     authScreen.classList.remove('hidden');
                     appScreen.classList.add('hidden');
                     detachListeners();
+                    // NOVO: Reseta a flag de checagem de recorrência no logout
+                    AppState.hasCheckedRecurring = false;
                 }
                 feather.replace();
             });
@@ -595,6 +614,12 @@
             function attachListeners() {
                 if (!AppState.currentUser) return;
                 detachListeners();
+
+                // NOVO: Verifica e gera transações recorrentes
+                if (!AppState.hasCheckedRecurring) {
+                    checkAndGenerateRecurringTransactions();
+                    AppState.hasCheckedRecurring = true;
+                }
 
                 const categoriesQuery = query(collection(db, `users/${AppState.currentUser.uid}/categories`), orderBy("name"));
                 AppState.listeners.categories = onSnapshot(categoriesQuery, (snapshot) => {
@@ -686,28 +711,51 @@
             
             document.getElementById('transaction-form').addEventListener('submit', async (e) => {
                 e.preventDefault();
-                const id = e.target['transaction-id'].value;
-                const transactionData = {
-                    type: e.target['transaction-type'].value,
-                    amount: parseFloat(e.target['transaction-amount'].value),
-                    description: e.target['transaction-description'].value,
-                    categoryId: e.target['transaction-category'].value,
-                    date: e.target['transaction-date'].value,
-                };
+                const form = e.target;
+                const id = form['transaction-id'].value;
+                const isRecurring = form['is-recurring'].checked;
 
-                if (Object.values(transactionData).some(val => !val)) {
-                    showToast("Por favor, preencha todos os campos.", true);
+                const transactionData = {
+                    type: form['transaction-type'].value,
+                    amount: parseFloat(form['transaction-amount'].value),
+                    description: form['transaction-description'].value,
+                    categoryId: form['transaction-category'].value,
+                    date: form['transaction-date'].value,
+                };
+                
+                // Validação
+                if (!transactionData.type || !transactionData.amount || !transactionData.description || !transactionData.categoryId || !transactionData.date) {
+                    showToast("Por favor, preencha todos os campos principais.", true);
                     return;
                 }
 
                 try {
+                    // Se for recorrente, salva o modelo de recorrência
+                    if (isRecurring && !id) { // Só cria recorrência para novas transações
+                        const recurringData = {
+                            ...transactionData,
+                            frequency: form['recurring-frequency'].value,
+                            endDate: form['recurring-end-date'].value ? Timestamp.fromDate(new Date(form['recurring-end-date'].value + 'T23:59:59')) : null,
+                            nextDueDate: Timestamp.fromDate(new Date(transactionData.date + 'T00:00:00')),
+                            isActive: true
+                        };
+                        await addDoc(collection(db, `users/${AppState.currentUser.uid}/recurringTransactions`), recurringData);
+                        showToast('Lançamento recorrente agendado!');
+                    }
+
+                    // Salva ou atualiza a transação individual
                     const action = id 
                         ? updateDoc(doc(db, `users/${AppState.currentUser.uid}/transactions`, id), transactionData)
                         : addDoc(collection(db, `users/${AppState.currentUser.uid}/transactions`), transactionData);
+                    
                     await action;
                     showToast(`Transação ${id ? 'atualizada' : 'adicionada'}!`);
                     closeModal('transaction-modal');
-                } catch (error) { showToast('Erro ao salvar transação.', true); }
+
+                } catch (error) { 
+                    console.error("Erro ao salvar:", error);
+                    showToast('Erro ao salvar transação.', true); 
+                }
             });
             
             // --- DASHBOARD E GRÁFICOS ---
@@ -971,6 +1019,10 @@
                 const form = document.getElementById('transaction-form');
                 form.reset();
                 document.getElementById('transaction-id').value = '';
+                // NOVO: Resetar e esconder opções de recorrência
+                document.getElementById('is-recurring').checked = false;
+                document.getElementById('recurring-options').classList.add('hidden');
+                document.getElementById('is-recurring').disabled = false;
                 
                 if (transaction) {
                     document.getElementById('modal-title').textContent = 'Editar Transação';
@@ -980,6 +1032,8 @@
                     document.getElementById('transaction-date').value = transaction.date;
                     setTransactionType(transaction.type);
                     document.getElementById('transaction-category').value = transaction.categoryId;
+                    // NOVO: Desabilitar recorrência na edição
+                    document.getElementById('is-recurring').disabled = true;
                 } else {
                     document.getElementById('modal-title').textContent = 'Adicionar Transação';
                     document.getElementById('transaction-date').valueAsDate = new Date();
@@ -1030,7 +1084,7 @@
 
                 // Ações de Categoria
                 const deleteCategoryBtn = e.target.closest('.delete-category-btn');
-                if (deleteCategoryBtn && confirm('Tem certeza que deseja excluir esta categoria?')) {
+                if (deleteCategoryBtn && confirm('Tem certeza que deseja excluir esta categoria? Isso não afetará as transações existentes.')) {
                     try {
                         await deleteDoc(doc(db, `users/${AppState.currentUser.uid}/categories`, deleteCategoryBtn.dataset.id));
                         showToast('Categoria excluída.');
@@ -1045,48 +1099,45 @@
             document.getElementById('manage-categories-btn').addEventListener('click', () => openModal('category-modal'));
             document.getElementById('close-category-modal').addEventListener('click', () => closeModal('category-modal'));
 
+            // NOVO: Listener para a checkbox de recorrência
+            document.getElementById('is-recurring').addEventListener('change', (e) => {
+                document.getElementById('recurring-options').classList.toggle('hidden', !e.target.checked);
+            });
+
             // --- EXPORTAR DADOS ---
             document.getElementById('export-pdf-btn').addEventListener('click', async () => {
                 const { jsPDF } = window.jspdf;
-                const doc = new jsPDF({
-                    orientation: 'p',
-                    unit: 'mm',
-                    format: 'a4'
-                });
+                const docPDF = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
 
                 showToast('Gerando seu relatório PDF...');
 
-                // Adiciona o cabeçalho
-                doc.setFontSize(22);
-                doc.setFont('helvetica', 'bold');
-                doc.text('FinanTrack', 15, 20);
-                doc.setFontSize(12);
-                doc.setFont('helvetica', 'normal');
-                doc.text('Relatório Financeiro', 15, 28);
-                doc.setFontSize(10);
-                doc.setTextColor(150);
-                doc.text(`Gerado em: ${new Date().toLocaleDateString('pt-BR')}`, 15, 34);
+                docPDF.setFontSize(22);
+                docPDF.setFont('helvetica', 'bold');
+                docPDF.text('FinanTrack', 15, 20);
+                docPDF.setFontSize(12);
+                docPDF.setFont('helvetica', 'normal');
+                docPDF.text('Relatório Financeiro', 15, 28);
+                docPDF.setFontSize(10);
+                docPDF.setTextColor(150);
+                docPDF.text(`Gerado em: ${new Date().toLocaleDateString('pt-BR')}`, 15, 34);
                 
-                // Adiciona os cards de resumo
                 const summaryElement = document.getElementById('summary');
                 const summaryCanvas = await window.html2canvas(summaryElement, { backgroundColor: '#1e293b' });
                 const summaryImgData = summaryCanvas.toDataURL('image/png');
-                doc.addImage(summaryImgData, 'PNG', 15, 45, 180, 30);
+                docPDF.addImage(summaryImgData, 'PNG', 15, 45, 180, 30);
 
-                // Adiciona os gráficos
                 const pieChartCanvas = await window.html2canvas(document.getElementById('expense-pie-chart').parentElement, { backgroundColor: '#1e293b' });
                 const pieChartImgData = pieChartCanvas.toDataURL('image/png');
-                doc.addImage(pieChartImgData, 'PNG', 15, 85, 90, 90);
+                docPDF.addImage(pieChartImgData, 'PNG', 15, 85, 90, 90);
 
                 const monthlyChartCanvas = await window.html2canvas(document.getElementById('monthly-trend-chart').parentElement, { backgroundColor: '#1e293b' });
                 const monthlyChartImgData = monthlyChartCanvas.toDataURL('image/png');
-                doc.addImage(monthlyChartImgData, 'PNG', 110, 85, 90, 90);
+                docPDF.addImage(monthlyChartImgData, 'PNG', 110, 85, 90, 90);
 
-                // Adiciona a tabela de transações
-                doc.addPage();
-                doc.setFontSize(16);
-                doc.setFont('helvetica', 'bold');
-                doc.text('Detalhes das Transações', 15, 20);
+                docPDF.addPage();
+                docPDF.setFontSize(16);
+                docPDF.setFont('helvetica', 'bold');
+                docPDF.text('Detalhes das Transações', 15, 20);
                 
                 const transactionsToExport = applyFilters(AppState.transactions);
                 const tableData = transactionsToExport.map(tx => {
@@ -1099,15 +1150,15 @@
                     ];
                 });
 
-                doc.autoTable({
+                docPDF.autoTable({
                     head: [['Descrição', 'Data', 'Categoria', 'Valor']],
                     body: tableData,
                     startY: 30,
                     theme: 'striped',
-                    headStyles: { fillColor: [148, 105, 224] }, // Roxo
+                    headStyles: { fillColor: [148, 105, 224] },
                 });
                 
-                doc.save(`Relatorio_FinanTrack_${new Date().toISOString().slice(0,10)}.pdf`);
+                docPDF.save(`Relatorio_FinanTrack_${new Date().toISOString().slice(0,10)}.pdf`);
             });
 
             document.getElementById('export-csv-btn').addEventListener('click', () => {
@@ -1116,24 +1167,20 @@
                     showToast('Não há dados para exportar.', true);
                     return;
                 }
-
                 showToast('Gerando seu arquivo CSV...');
-
                 const headers = ['Data', 'Descrição', 'Categoria', 'Tipo', 'Valor'];
                 const csvRows = [headers.join(',')];
-
                 transactionsToExport.forEach(tx => {
                     const category = AppState.categories.find(c => c.id === tx.categoryId);
                     const row = [
                         tx.date,
-                        `"${tx.description.replace(/"/g, '""')}"`, // Trata aspas na descrição
+                        `"${tx.description.replace(/"/g, '""')}"`,
                         category ? category.name : 'N/A',
                         tx.type === 'income' ? 'Receita' : 'Despesa',
                         tx.amount
                     ];
                     csvRows.push(row.join(','));
                 });
-
                 const csvString = csvRows.join('\n');
                 const blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
                 const link = document.createElement('a');
@@ -1147,6 +1194,100 @@
                     document.body.removeChild(link);
                 }
             });
+
+            // =================================================================================
+            // NOVO: LÓGICA DAS NOVAS FEATURES
+            // =================================================================================
+
+            // --- 1. CLASSIFICAÇÃO AUTOMÁTICA ---
+            function suggestCategory(description) {
+                if (!description) return;
+                const lowerDesc = description.toLowerCase();
+                const transactionType = document.getElementById('transaction-type').value;
+
+                for (const categoryName in categoryKeywords) {
+                    const keywords = categoryKeywords[categoryName];
+                    if (keywords.some(keyword => lowerDesc.includes(keyword))) {
+                        // Encontra a categoria do usuário que corresponde ao nome e tipo
+                        const userCategory = AppState.categories.find(c => 
+                            c.name.toLowerCase() === categoryName.toLowerCase() && c.type === transactionType
+                        );
+
+                        if (userCategory) {
+                            document.getElementById('transaction-category').value = userCategory.id;
+                            break; // Para na primeira correspondência
+                        }
+                    }
+                }
+            }
+            // Adiciona o listener ao campo de descrição
+            document.getElementById('transaction-description').addEventListener('blur', (e) => {
+                suggestCategory(e.target.value);
+            });
+
+
+            // --- 2. LANÇAMENTOS RECORRENTES ---
+            async function checkAndGenerateRecurringTransactions() {
+                if (!AppState.currentUser) return;
+                console.log("Verificando lançamentos recorrentes...");
+
+                const now = Timestamp.now();
+                const recurringRef = collection(db, `users/${AppState.currentUser.uid}/recurringTransactions`);
+                const q = query(recurringRef, where("isActive", "==", true), where("nextDueDate", "<=", now));
+
+                try {
+                    const querySnapshot = await getDocs(q);
+                    if (querySnapshot.empty) {
+                        console.log("Nenhum lançamento recorrente para gerar.");
+                        return;
+                    }
+
+                    const batch = writeBatch(db);
+                    let generatedCount = 0;
+
+                    querySnapshot.forEach(docSnap => {
+                        const recurringTx = { id: docSnap.id, ...docSnap.data() };
+                        
+                        // Gera a nova transação
+                        const newTransactionData = {
+                            amount: recurringTx.amount,
+                            categoryId: recurringTx.categoryId,
+                            date: recurringTx.nextDueDate.toDate().toISOString().slice(0, 10), // Converte Timestamp para 'YYYY-MM-DD'
+                            description: recurringTx.description,
+                            type: recurringTx.type,
+                        };
+                        const newTransactionRef = doc(collection(db, `users/${AppState.currentUser.uid}/transactions`));
+                        batch.set(newTransactionRef, newTransactionData);
+
+                        // Calcula a próxima data de vencimento
+                        let nextDueDate = recurringTx.nextDueDate.toDate();
+                        if (recurringTx.frequency === 'weekly') {
+                            nextDueDate.setDate(nextDueDate.getDate() + 7);
+                        } else { // monthly
+                            nextDueDate.setMonth(nextDueDate.getMonth() + 1);
+                        }
+
+                        // Atualiza o template de recorrência
+                        const recurringDocRef = doc(db, `users/${AppState.currentUser.uid}/recurringTransactions`, recurringTx.id);
+                        // Desativa se a próxima data passar da data final
+                        if (recurringTx.endDate && nextDueDate > recurringTx.endDate.toDate()) {
+                            batch.update(recurringDocRef, { isActive: false });
+                        } else {
+                            batch.update(recurringDocRef, { nextDueDate: Timestamp.fromDate(nextDueDate) });
+                        }
+                        generatedCount++;
+                    });
+
+                    await batch.commit();
+                    if (generatedCount > 0) {
+                        showToast(`${generatedCount} lançamento(s) recorrente(s) foram gerados.`);
+                    }
+
+                } catch (error) {
+                    console.error("Erro ao gerar transações recorrentes:", error);
+                    showToast("Erro ao processar lançamentos recorrentes.", true);
+                }
+            }
 
         });
     </script>
