@@ -88,6 +88,9 @@
             color: #ffffff;
             box-shadow: 0 4px 14px 0 rgb(124 58 237 / 50%);
         }
+        .mobile-active-link {
+            color: #a78bfa; /* purple-400 */
+        }
         .app-page {
             animation: fadeIn 0.3s ease-in-out;
         }
@@ -176,7 +179,7 @@
 
     <div id="app-screen" class="hidden">
         <div class="flex h-screen">
-            <aside id="sidebar" class="w-64 bg-slate-800 border-r border-slate-700 p-4 flex-shrink-0 flex flex-col transition-transform -translate-x-full md:translate-x-0 fixed md:static h-full z-30">
+            <aside id="sidebar" class="w-64 bg-slate-800 border-r border-slate-700 p-4 flex-shrink-0 flex-col hidden md:flex">
                 <div class="flex items-center gap-2 mb-10">
                     <h1 class="text-2xl font-extrabold text-white">Finan<span class="text-purple-400">Track</span></h1>
                 </div>
@@ -203,7 +206,7 @@
                     </a>
                 </nav>
                 <div class="mt-auto">
-                     <span id="user-greeting" class="text-slate-400 hidden md:block text-center text-sm mb-2"></span>
+                     <span id="user-greeting" class="text-slate-400 text-center text-sm mb-2"></span>
                      <div id="user-avatar-container" class="flex items-center justify-center gap-3 mb-2"></div>
                      <button id="logout-btn" class="w-full flex items-center justify-center gap-2 text-slate-400 hover:bg-red-500/20 hover:text-red-400 transition-colors p-2 rounded-lg" title="Sair">
                         <i data-feather="log-out" class="w-5 h-5"></i>
@@ -213,14 +216,7 @@
             </aside>
             
             <div class="flex-1 flex flex-col">
-                <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-20 border-b border-slate-800 p-4 flex justify-between items-center md:hidden">
-                    <h1 class="text-2xl font-extrabold text-white">Finan<span class="text-purple-400">Track</span></h1>
-                    <button id="mobile-menu-btn" class="text-slate-300 hover:text-white">
-                        <i data-feather="menu" class="w-6 h-6"></i>
-                    </button>
-                </header>
-                
-                <main id="main-content" class="flex-1 overflow-y-auto p-4 md:p-8">
+                 <main id="main-content" class="flex-1 overflow-y-auto p-4 md:p-8 pb-24 md:pb-8">
                     <div id="dashboard-page" class="app-page">
                         <section id="summary" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                             <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 flex items-center gap-4 fade-in-up" style="animation-delay: 200ms;">
@@ -340,26 +336,13 @@
                             </div>
                         </section>
 
-                        <section id="transactions-list" class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 300ms;">
-                            <div id="transactions-table-container" class="overflow-x-auto">
-                                <table class="w-full text-left">
-                                    <thead>
-                                        <tr class="border-b border-slate-700">
-                                            <th class="p-3 text-sm font-semibold text-slate-400">Descrição / Conta</th>
-                                            <th class="p-3 text-sm font-semibold text-slate-400">Valor</th>
-                                            <th class="p-3 text-sm font-semibold text-slate-400 hidden md:table-cell">Categoria</th>
-                                            <th class="p-3 text-sm font-semibold text-slate-400 hidden md:table-cell">Data</th>
-                                            <th class="p-3 text-sm font-semibold text-slate-400 text-right">Ações</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="transactions-tbody">
-                                        </tbody>
-                                </table>
-                                 <p id="no-transactions-msg" class="text-center text-slate-500 py-12">
-                                     <i data-feather="ghost" class="mx-auto w-12 h-12 mb-2"></i>
-                                     Nenhum lançamento encontrado.
-                                 </p>
-                            </div>
+                        <section id="transactions-list" class="fade-in-up" style="animation-delay: 300ms;">
+                            <div id="transactions-tbody" class="space-y-3">
+                                </div>
+                            <p id="no-transactions-msg" class="text-center text-slate-500 py-12">
+                                <i data-feather="ghost" class="mx-auto w-12 h-12 mb-2"></i>
+                                Nenhum lançamento encontrado.
+                            </p>
                         </section>
                     </div>
 
@@ -442,6 +425,25 @@
                 </main>
             </div>
         </div>
+
+        <footer id="mobile-nav" class="md:hidden fixed bottom-0 left-0 right-0 bg-slate-800 border-t border-slate-700 flex justify-around items-center h-16 z-30">
+            <a href="#" data-page="dashboard-page" class="mobile-nav-link flex flex-col items-center justify-center text-slate-400">
+                <i data-feather="home" class="w-6 h-6"></i>
+                <span class="text-xs">Dashboard</span>
+            </a>
+            <a href="#" data-page="transactions-page" class="mobile-nav-link flex flex-col items-center justify-center text-slate-400">
+                <i data-feather="repeat" class="w-6 h-6"></i>
+                <span class="text-xs">Transações</span>
+            </a>
+            <a href="#" data-page="accounts-page" class="mobile-nav-link flex flex-col items-center justify-center text-slate-400">
+                <i data-feather="credit-card" class="w-6 h-6"></i>
+                <span class="text-xs">Contas</span>
+            </a>
+             <a href="#" data-page="settings-page" class="mobile-nav-link flex flex-col items-center justify-center text-slate-400">
+                <i data-feather="settings" class="w-6 h-6"></i>
+                <span class="text-xs">Ajustes</span>
+            </a>
+        </footer>
     </div>
     
     <div id="transaction-modal" class="modal fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 hidden transition-opacity duration-300 opacity-0 z-40">
@@ -846,30 +848,26 @@
             // =================================================================================
             const pages = document.querySelectorAll('.app-page');
             const navLinks = document.querySelectorAll('.nav-link');
-            const sidebar = document.getElementById('sidebar');
+            const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
 
             function navigateTo(pageId) {
-                // Esconde todas as páginas
                 pages.forEach(page => page.classList.add('hidden'));
-                // Mostra a página desejada
                 const targetPage = document.getElementById(pageId);
                 if (targetPage) {
                     targetPage.classList.remove('hidden');
                 }
                 
-                // Atualiza o link ativo na navegação
+                // Atualiza link ativo no sidebar do desktop
                 navLinks.forEach(link => {
-                    if (link.dataset.page === pageId) {
-                        link.classList.add('active-link');
-                    } else {
-                        link.classList.remove('active-link');
-                    }
+                    link.classList.toggle('active-link', link.dataset.page === pageId);
                 });
 
-                // Esconde o menu mobile após a navegação
-                sidebar.classList.add('-translate-x-full');
+                // Atualiza link ativo na barra inferior do mobile
+                mobileNavLinks.forEach(link => {
+                    link.classList.toggle('mobile-active-link', link.dataset.page === pageId);
+                    link.classList.toggle('text-slate-400', link.dataset.page !== pageId);
+                });
 
-                // Garante que os ícones sejam renderizados na nova página visível
                 feather.replace();
             }
 
@@ -880,9 +878,13 @@
                     navigateTo(link.dataset.page);
                 }
             });
-
-            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
+            
+            document.getElementById('mobile-nav').addEventListener('click', (e) => {
+                const link = e.target.closest('a.mobile-nav-link');
+                if (link && link.dataset.page) {
+                    e.preventDefault();
+                    navigateTo(link.dataset.page);
+                }
             });
 
 
@@ -899,7 +901,7 @@
                     document.getElementById('user-greeting').textContent = `Olá, ${user.displayName || user.email.split('@')[0]}!`;
                     updateUserAvatar(user);
                     attachListeners();
-                    navigateTo('dashboard-page'); // Página inicial após login
+                    navigateTo('dashboard-page');
                 } else {
                     AppState.currentUser = null;
                     authScreen.classList.remove('hidden');
@@ -921,7 +923,7 @@
                     };
                     const userCredential = await action(auth, ...args);
                     if (action.name === 'createUserWithEmailAndPassword') {
-                         await updateProfile(userCredential.user, { displayName: args[2] }); // args[2] is name
+                         await updateProfile(userCredential.user, { displayName: args[2] });
                     }
                     showToast(messages[action.name] || 'Ação realizada com sucesso!');
                     if(action.name === 'sendPasswordResetEmail') {
@@ -949,7 +951,6 @@
                 handleAuthAction(sendPasswordResetEmail, e.target['reset-email'].value);
             });
 
-            // Navegação Auth
             const authViews = { login: document.getElementById('login-view'), signup: document.getElementById('signup-view'), reset: document.getElementById('reset-password-view') };
             const showAuthView = (viewToShow) => {
                 Object.values(authViews).forEach(view => view.classList.add('hidden'));
@@ -1120,7 +1121,6 @@
                 }
             });
 
-
             // --- CATEGORIAS ---
             function renderCategoryList() {
                 const categoryList = document.getElementById('category-list');
@@ -1149,58 +1149,60 @@
                 }
             });
             
-            // --- TRANSAÇÕES ---
+            // --- TRANSAÇÕES (COM LAYOUT RESPONSIVO) ---
             function renderTransactions(transactions) {
-                const tbody = document.getElementById('transactions-tbody');
+                const container = document.getElementById('transactions-tbody');
                 const noTransactionsMsg = document.getElementById('no-transactions-msg');
                 
                 if (transactions.length === 0) {
-                    tbody.innerHTML = '';
+                    container.innerHTML = '';
                     noTransactionsMsg.classList.remove('hidden');
                     return;
                 }
                 
                 noTransactionsMsg.classList.add('hidden');
-                tbody.innerHTML = transactions.map(tx => {
-                    let descriptionHtml;
+                container.innerHTML = transactions.map(tx => {
                     let amountHtml;
                     let categoryName = 'N/A';
+                    let accountName = 'N/A';
+
+                    const category = AppState.categories.find(c => c.id === tx.categoryId);
+                    categoryName = category?.name || 'Sem categoria';
 
                     if (tx.type === 'transfer') {
                         const sourceAccount = AppState.accounts.find(a => a.id === tx.sourceAccountId);
                         const destAccount = AppState.accounts.find(a => a.id === tx.destinationAccountId);
-                        descriptionHtml = `
-                            <p class="font-semibold text-white">${tx.description}</p>
-                            <p class="text-sm text-purple-400">${sourceAccount?.name || 'N/A'} → ${destAccount?.name || 'N/A'}</p>
-                        `;
-                        amountHtml = `<span class="text-blue-400">${formatCurrency(tx.amount)}</span>`;
+                        accountName = `${sourceAccount?.name || ''} → ${destAccount?.name || ''}`;
+                        amountHtml = `<span class="text-lg font-bold text-blue-400">${formatCurrency(tx.amount)}</span>`;
                         categoryName = 'Transferência';
                     } else {
                         const account = AppState.accounts.find(a => a.id === tx.accountId);
-                        const category = AppState.categories.find(c => c.id === tx.categoryId);
+                        accountName = account?.name || 'N/A';
                         const isIncome = tx.type === 'income';
-
-                        descriptionHtml = `
-                            <p class="font-semibold text-white">${tx.description}</p>
-                            <p class="text-sm text-slate-400">${account?.name || 'N/A'}</p>
-                        `;
-                        amountHtml = `<span class="${isIncome ? 'text-green-400' : 'text-red-400'}">${isIncome ? '+' : '-'} ${formatCurrency(tx.amount)}</span>`;
-                        categoryName = category?.name || 'Sem categoria';
+                        amountHtml = `<span class="text-lg font-bold ${isIncome ? 'text-green-400' : 'text-red-400'}">${isIncome ? '+' : '-'} ${formatCurrency(tx.amount)}</span>`;
                     }
 
                     return `
-                        <tr class="border-b border-slate-700 hover:bg-slate-700/50">
-                            <td class="p-3">${descriptionHtml}</td>
-                            <td class="p-3 font-medium">${amountHtml}</td>
-                            <td class="p-3 text-slate-400 hidden md:table-cell">${categoryName}</td>
-                            <td class="p-3 text-slate-400 hidden md:table-cell">${formatDate(tx.date)}</td>
-                            <td class="p-3">
-                                <div class="flex gap-2 justify-end">
+                        <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700 flex justify-between items-center">
+                            <div class="flex-1 min-w-0">
+                                <p class="font-semibold text-white truncate">${tx.description}</p>
+                                <div class="text-sm text-slate-400 flex items-center gap-4 mt-1">
+                                    <span>${categoryName}</span>
+                                    <span class="hidden sm:inline">•</span>
+                                    <span class="hidden sm:inline">${accountName}</span>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-4 ml-4">
+                                <div class="text-right">
+                                    ${amountHtml}
+                                    <p class="text-sm text-slate-500">${formatDate(tx.date)}</p>
+                                </div>
+                                <div class="flex gap-2">
                                     <button data-id="${tx.id}" class="edit-transaction-btn text-slate-500 hover:text-purple-400 transition-colors"><i data-feather="edit" class="w-4 h-4"></i></button>
                                     <button data-id="${tx.id}" class="delete-transaction-btn text-slate-500 hover:text-red-500 transition-colors"><i data-feather="trash-2" class="w-4 h-4"></i></button>
                                 </div>
-                            </td>
-                        </tr>
+                            </div>
+                        </div>
                     `;
                 }).join('');
                 feather.replace();
@@ -1457,7 +1459,6 @@
                 const { period, startDate, endDate, type, category, account, text } = AppState.filters;
                 let filtered = [...transactions];
 
-                // Filtro de Período
                 if (period !== 'all_time') {
                     let start, end;
                     const today = new Date();
@@ -1479,22 +1480,15 @@
                     }
                 }
 
-                // Filtro de Tipo
                 if (type !== 'all') {
                     filtered = filtered.filter(tx => tx.type === type);
                 }
-
-                // Filtro de Categoria
                 if (category !== 'all') {
                     filtered = filtered.filter(tx => tx.categoryId === category);
                 }
-                
-                // Filtro de Conta
                 if (account !== 'all') {
                     filtered = filtered.filter(tx => tx.accountId === account || tx.sourceAccountId === account || tx.destinationAccountId === account);
                 }
-
-                // Filtro de Texto
                 if (text) {
                     filtered = filtered.filter(tx => tx.description.toLowerCase().includes(text.toLowerCase()));
                 }
@@ -1661,9 +1655,7 @@
                 updateTransactionAccountDropdowns();
             }
             
-            // Event Listeners Globais para Ações
             document.addEventListener('click', async (e) => {
-                // Ações de Transação
                 const editTxBtn = e.target.closest('.edit-transaction-btn');
                 if (editTxBtn) {
                     const txToEdit = AppState.transactions.find(tx => tx.id === editTxBtn.dataset.id);
@@ -1678,7 +1670,6 @@
                     } catch (error) { showToast('Erro ao excluir transação.', true); }
                 }
 
-                // Ações de Categoria
                 const deleteCategoryBtn = e.target.closest('.delete-category-btn');
                 if (deleteCategoryBtn && confirm('Tem certeza que deseja excluir esta categoria? Isso não afetará as transações existentes.')) {
                     try {
@@ -1687,7 +1678,6 @@
                     } catch (error) { showToast('Erro ao excluir categoria.', true); }
                 }
                 
-                // Ações de Conta
                 const editAccountBtn = e.target.closest('.edit-account-btn');
                 if (editAccountBtn) {
                     const accountToEdit = AppState.accounts.find(a => a.id === editAccountBtn.dataset.id);
@@ -1708,32 +1698,24 @@
                 if (deleteAccountBtn && confirm('Atenção: Excluir esta conta irá apagar TODAS as transações associadas a ela. Deseja continuar?')) {
                     try {
                         const accountId = deleteAccountBtn.dataset.id;
-                        
                         const batch = writeBatch(db);
-                        
                         const q1 = query(collection(db, `users/${AppState.currentUser.uid}/transactions`), where('accountId', '==', accountId));
                         const q2 = query(collection(db, `users/${AppState.currentUser.uid}/transactions`), where('sourceAccountId', '==', accountId));
                         const q3 = query(collection(db, `users/${AppState.currentUser.uid}/transactions`), where('destinationAccountId', '==', accountId));
-
                         const [snap1, snap2, snap3] = await Promise.all([getDocs(q1), getDocs(q2), getDocs(q3)]);
-                        
                         snap1.forEach(doc => batch.delete(doc.ref));
                         snap2.forEach(doc => batch.delete(doc.ref));
                         snap3.forEach(doc => batch.delete(doc.ref));
-
                         const accountRef = doc(db, `users/${AppState.currentUser.uid}/accounts`, accountId);
                         batch.delete(accountRef);
-                        
                         await batch.commit();
                         showToast('Conta e transações associadas foram excluídas.');
-
                     } catch(error) {
                         console.error('Erro ao excluir conta:', error);
                         showToast('Erro ao excluir a conta.', true);
                     }
                 }
 
-                // Ações de Meta
                 const editGoalBtn = e.target.closest('.edit-goal-btn');
                 if (editGoalBtn) {
                     const goalToEdit = AppState.goals.find(g => g.id === editGoalBtn.dataset.id);
@@ -1757,8 +1739,6 @@
             document.getElementById('add-account-btn').addEventListener('click', () => openAccountModal());
             document.getElementById('close-account-modal').addEventListener('click', () => closeModal('account-modal'));
             document.getElementById('cancel-account-edit').addEventListener('click', resetAccountForm);
-
-
             document.getElementById('is-recurring').addEventListener('change', (e) => {
                 document.getElementById('recurring-options').classList.toggle('hidden', !e.target.checked);
             });
@@ -1767,7 +1747,6 @@
             document.getElementById('export-pdf-btn').addEventListener('click', async () => {
                 const { jsPDF } = window.jspdf;
                 const docPDF = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
-
                 showToast('Gerando seu relatório PDF...');
 
                 docPDF.setFontSize(22);
@@ -1779,19 +1758,25 @@
                 docPDF.setFontSize(10);
                 docPDF.setTextColor(150);
                 docPDF.text(`Gerado em: ${new Date().toLocaleDateString('pt-BR')}`, 15, 34);
+
+                // Captura os elementos do Dashboard para o PDF
+                const summaryElement = document.querySelector('#dashboard-page #summary');
+                const pieChartElement = document.querySelector('#dashboard-page #expense-pie-chart').parentElement;
+                const monthlyChartElement = document.querySelector('#dashboard-page #monthly-trend-chart').parentElement;
                 
-                const summaryElement = document.getElementById('summary');
+                if(!summaryElement || !pieChartElement || !monthlyChartElement) {
+                    showToast("Erro: Elementos do dashboard não encontrados para gerar o PDF.", true);
+                    return;
+                }
+                
                 const summaryCanvas = await window.html2canvas(summaryElement, { backgroundColor: '#1e293b' });
-                const summaryImgData = summaryCanvas.toDataURL('image/png');
-                docPDF.addImage(summaryImgData, 'PNG', 15, 45, 180, 30);
+                docPDF.addImage(summaryCanvas.toDataURL('image/png'), 'PNG', 15, 45, 180, 30);
 
-                const pieChartCanvas = await window.html2canvas(document.getElementById('expense-pie-chart').parentElement, { backgroundColor: '#1e293b' });
-                const pieChartImgData = pieChartCanvas.toDataURL('image/png');
-                docPDF.addImage(pieChartImgData, 'PNG', 15, 85, 90, 90);
+                const pieChartCanvas = await window.html2canvas(pieChartElement, { backgroundColor: '#1e293b' });
+                docPDF.addImage(pieChartCanvas.toDataURL('image/png'), 'PNG', 15, 85, 90, 90);
 
-                const monthlyChartCanvas = await window.html2canvas(document.getElementById('monthly-trend-chart').parentElement, { backgroundColor: '#1e293b' });
-                const monthlyChartImgData = monthlyChartCanvas.toDataURL('image/png');
-                docPDF.addImage(monthlyChartImgData, 'PNG', 110, 85, 90, 90);
+                const monthlyChartCanvas = await window.html2canvas(monthlyChartElement, { backgroundColor: '#1e293b' });
+                docPDF.addImage(monthlyChartCanvas.toDataURL('image/png'), 'PNG', 110, 85, 90, 90);
 
                 docPDF.addPage();
                 docPDF.setFontSize(16);
@@ -1811,12 +1796,7 @@
                     } else if (tx.type === 'transfer') {
                         category = 'Transferência';
                     }
-                    return [
-                        tx.description,
-                        formatDate(tx.date),
-                        category,
-                        value
-                    ];
+                    return [ tx.description, formatDate(tx.date), category, value ];
                 });
 
                 docPDF.autoTable({
@@ -1853,14 +1833,7 @@
                         type = 'Transferência';
                     }
 
-                    const row = [
-                        tx.date,
-                        `"${tx.description.replace(/"/g, '""')}"`,
-                        `"${accountName}"`,
-                        `"${categoryName}"`,
-                        type,
-                        value
-                    ];
+                    const row = [ tx.date, `"${tx.description.replace(/"/g, '""')}"`, `"${accountName}"`, `"${categoryName}"`, type, value ];
                     csvRows.push(row.join(','));
                 });
                 const csvString = csvRows.join('\n');
@@ -1876,10 +1849,6 @@
                     document.body.removeChild(link);
                 }
             });
-
-            // =================================================================================
-            // LÓGICA DAS NOVAS FEATURES
-            // =================================================================================
 
             // --- CLASSIFICAÇÃO AUTOMÁTICA ---
             function suggestCategory(description) {
@@ -1910,7 +1879,6 @@
             async function checkAndGenerateRecurringTransactions() {
                 if (!AppState.currentUser) return;
                 console.log("Verificando lançamentos recorrentes...");
-
                 const now = Timestamp.now();
                 const recurringRef = collection(db, `users/${AppState.currentUser.uid}/recurringTransactions`);
                 const q = query(recurringRef, where("isActive", "==", true), where("nextDueDate", "<=", now));
@@ -1927,7 +1895,6 @@
 
                     querySnapshot.forEach(docSnap => {
                         const recurringTx = { id: docSnap.id, ...docSnap.data() };
-                        
                         const newTransactionData = {
                             amount: recurringTx.amount,
                             categoryId: recurringTx.categoryId,
@@ -1942,7 +1909,7 @@
                         let nextDueDate = recurringTx.nextDueDate.toDate();
                         if (recurringTx.frequency === 'weekly') {
                             nextDueDate.setDate(nextDueDate.getDate() + 7);
-                        } else { // monthly
+                        } else {
                             nextDueDate.setMonth(nextDueDate.getMonth() + 1);
                         }
 
@@ -1959,7 +1926,6 @@
                     if (generatedCount > 0) {
                         showToast(`${generatedCount} lançamento(s) recorrente(s) foram gerados.`);
                     }
-
                 } catch (error) {
                     console.error("Erro ao gerar transações recorrentes:", error);
                     showToast("Erro ao processar lançamentos recorrentes.", true);
@@ -2116,14 +2082,9 @@
             document.getElementById('add-goal-btn').addEventListener('click', () => openGoalModal());
             document.getElementById('cancel-goal').addEventListener('click', () => closeModal('goal-modal'));
 
-            // =================================================================================
-            // NOVA FUNCIONALIDADE: IMPORTAÇÃO DE EXTRATO
-            // =================================================================================
+            // --- IMPORTAÇÃO DE EXTRATO ---
             const importState = {
-                fileContent: null,
-                fileType: null,
-                parsedData: [],
-                headers: [],
+                fileContent: null, fileType: null, parsedData: [], headers: [],
             };
 
             function resetImportModal() {
@@ -2131,18 +2092,14 @@
                 document.getElementById('import-step-1').classList.remove('hidden');
                 document.getElementById('import-step-2').classList.add('hidden');
                 document.getElementById('import-step-3').classList.add('hidden');
-                importState.parsedData = [];
-                importState.headers = [];
+                importState.parsedData = []; importState.headers = [];
             }
             
             function openImportModal() {
                 if (AppState.accounts.length === 0) {
-                    showToast("Você precisa cadastrar uma conta antes de importar um extrato.", true);
-                    return;
+                    showToast("Você precisa cadastrar uma conta antes de importar um extrato.", true); return;
                 }
-                resetImportModal();
-                updateTransactionAccountDropdowns();
-                openModal('import-modal');
+                resetImportModal(); updateTransactionAccountDropdowns(); openModal('import-modal');
             }
 
             document.getElementById('import-statement-btn').addEventListener('click', openImportModal);
@@ -2154,34 +2111,21 @@
                 const fileInput = document.getElementById('import-file-input');
                 const file = fileInput.files[0];
                 const accountId = document.getElementById('import-account-select').value;
-
-                if (!file || !accountId) {
-                    showToast("Por favor, selecione um arquivo e uma conta.", true);
-                    return;
-                }
-                
+                if (!file || !accountId) { showToast("Por favor, selecione um arquivo e uma conta.", true); return; }
                 AppState.importData.accountId = accountId;
-
                 try {
                     const fileContent = await file.text();
                     const fileExtension = file.name.split('.').pop().toLowerCase();
-                    
                     if (fileExtension === 'csv') {
                         const { data, headers } = parseCSV(fileContent);
-                        importState.parsedData = data;
-                        importState.headers = headers;
+                        importState.parsedData = data; importState.headers = headers;
                     } else if (fileExtension === 'ofx') {
                         const { data, headers } = parseOFX(fileContent);
-                        importState.parsedData = data;
-                        importState.headers = headers;
-                    } else {
-                        throw new Error("Formato de arquivo não suportado.");
-                    }
-
+                        importState.parsedData = data; importState.headers = headers;
+                    } else { throw new Error("Formato de arquivo não suportado."); }
                     setupMappingStep();
                     document.getElementById('import-step-1').classList.add('hidden');
                     document.getElementById('import-step-2').classList.remove('hidden');
-
                 } catch (error) {
                     console.error("Erro ao processar arquivo:", error);
                     showToast(`Erro ao ler o arquivo: ${error.message}`, true);
@@ -2191,15 +2135,11 @@
             function parseCSV(csvText) {
                 const lines = csvText.split(/\r?\n/).filter(line => line.trim() !== '');
                 if (lines.length < 2) return { data: [], headers: [] };
-
                 const separator = lines[0].includes(';') ? ';' : ',';
                 const headers = lines[0].split(separator).map(h => h.trim().replace(/"/g, ''));
                 const data = lines.slice(1).map(line => {
-                    const values = line.split(separator);
-                    let row = {};
-                    headers.forEach((header, index) => {
-                        row[header] = values[index] ? values[index].trim().replace(/"/g, '') : '';
-                    });
+                    const values = line.split(separator); let row = {};
+                    headers.forEach((header, index) => { row[header] = values[index] ? values[index].trim().replace(/"/g, '') : ''; });
                     return row;
                 });
                 return { data, headers };
@@ -2211,8 +2151,7 @@
                 const headers = ['date', 'description', 'amount'];
                 const data = transactions.map(t => ({
                     date: `${t.DTPOSTED.substring(0,4)}-${t.DTPOSTED.substring(4,6)}-${t.DTPOSTED.substring(6,8)}`,
-                    description: t.MEMO,
-                    amount: t.TRNAMT
+                    description: t.MEMO, amount: t.TRNAMT
                 }));
                 return { data, headers };
             }
@@ -2221,33 +2160,25 @@
                 const mappingContainer = document.getElementById('import-mapping-fields');
                 const appFields = { date: "Data", description: "Descrição", amount: "Valor (R$)" };
                 const optionsHtml = importState.headers.map(h => `<option value="${h}">${h}</option>`).join('');
-
                 mappingContainer.innerHTML = Object.keys(appFields).map(key => `
                     <div>
                         <label for="map-${key}" class="block text-sm font-medium text-slate-400 mb-1">${appFields[key]}</label>
                         <select id="map-${key}" data-field="${key}" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white">
-                            <option value="">Selecione uma coluna</option>
-                            ${optionsHtml}
+                            <option value="">Selecione uma coluna</option> ${optionsHtml}
                         </select>
-                    </div>
-                `).join('');
+                    </div>`).join('');
 
-                // Tenta mapear automaticamente
                 Object.keys(appFields).forEach(key => {
                     const select = document.getElementById(`map-${key}`);
                     const dateKeywords = ['data', 'date'];
                     const descKeywords = ['descrição', 'historico', 'memo', 'description'];
                     const amountKeywords = ['valor', 'montante', 'amount', 'trnamt'];
-
                     let keywords;
                     if(key === 'date') keywords = dateKeywords;
                     if(key === 'description') keywords = descKeywords;
                     if(key === 'amount') keywords = amountKeywords;
-
                     const foundHeader = importState.headers.find(h => keywords.some(k => h.toLowerCase().includes(k)));
-                    if (foundHeader) {
-                        select.value = foundHeader;
-                    }
+                    if (foundHeader) { select.value = foundHeader; }
                 });
             }
 
@@ -2257,50 +2188,24 @@
                 const amountMap = document.getElementById('map-amount').value;
                 const dateFormat = document.getElementById('import-date-format').value;
                 const decimalSeparator = document.getElementById('import-decimal-separator').value;
-                
-                if (!dateMap || !descMap || !amountMap) {
-                    showToast("Por favor, mapeie todos os campos obrigatórios.", true);
-                    return;
-                }
-
+                if (!dateMap || !descMap || !amountMap) { showToast("Por favor, mapeie todos os campos obrigatórios.", true); return; }
                 AppState.importData.mapped = importState.parsedData.map(row => {
-                    const rawAmount = String(row[amountMap]);
-                    let amount = 0;
+                    const rawAmount = String(row[amountMap]); let amount = 0;
                     if(rawAmount) {
-                       const cleanAmount = (decimalSeparator === ',') 
-                            ? rawAmount.replace(/\./g, '').replace(',', '.') 
-                            : rawAmount.replace(/,/g, '');
+                       const cleanAmount = (decimalSeparator === ',') ? rawAmount.replace(/\./g, '').replace(',', '.') : rawAmount.replace(/,/g, '');
                        amount = parseFloat(cleanAmount);
                     }
-
-                    let date;
-                    const rawDate = row[dateMap];
-                    if (dateFormat === 'dmy') { // DD/MM/AAAA
-                        const parts = rawDate.split('/');
-                        date = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
-                    } else if (dateFormat === 'mdy') { // MM/DD/AAAA
-                        const parts = rawDate.split('/');
-                        date = new Date(`${parts[2]}-${parts[0]}-${parts[1]}`);
-                    } else { // AAAA-MM-DD
-                        date = new Date(rawDate);
-                    }
+                    let date; const rawDate = row[dateMap];
+                    if (dateFormat === 'dmy') { const parts = rawDate.split('/'); date = new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+                    } else if (dateFormat === 'mdy') { const parts = rawDate.split('/'); date = new Date(`${parts[2]}-${parts[0]}-${parts[1]}`);
+                    } else { date = new Date(rawDate); }
                     date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
-
                     return {
-                        date: date.toISOString().slice(0, 10),
-                        description: row[descMap],
-                        amount: Math.abs(amount),
-                        type: amount >= 0 ? 'income' : 'expense',
-                        accountId: AppState.importData.accountId,
-                        categoryId: '' // Será preenchido depois ou deixado em branco
+                        date: date.toISOString().slice(0, 10), description: row[descMap], amount: Math.abs(amount),
+                        type: amount >= 0 ? 'income' : 'expense', accountId: AppState.importData.accountId, categoryId: ''
                     };
                 }).filter(tx => tx.amount && tx.description && !isNaN(new Date(tx.date).getTime()));
-                
-                if (AppState.importData.mapped.length === 0) {
-                    showToast("Nenhuma transação válida encontrada após o mapeamento. Verifique os formatos.", true);
-                    return;
-                }
-                
+                if (AppState.importData.mapped.length === 0) { showToast("Nenhuma transação válida. Verifique os formatos.", true); return; }
                 renderReviewStep();
                 document.getElementById('import-step-2').classList.add('hidden');
                 document.getElementById('import-step-3').classList.remove('hidden');
@@ -2311,14 +2216,9 @@
                 tbody.innerHTML = AppState.importData.mapped.map((tx, index) => `
                     <tr class="border-b border-slate-700 hover:bg-slate-700/50">
                         <td class="p-2"><input type="checkbox" class="import-checkbox" data-index="${index}" checked></td>
-                        <td class="p-2">${formatDate(tx.date)}</td>
-                        <td class="p-2">${tx.description}</td>
-                        <td class="p-2 text-right font-medium ${tx.type === 'income' ? 'text-green-400' : 'text-red-400'}">
-                            ${formatCurrency(tx.amount)}
-                        </td>
-                    </tr>
-                `).join('');
-
+                        <td class="p-2">${formatDate(tx.date)}</td> <td class="p-2">${tx.description}</td>
+                        <td class="p-2 text-right font-medium ${tx.type === 'income' ? 'text-green-400' : 'text-red-400'}">${formatCurrency(tx.amount)}</td>
+                    </tr>`).join('');
                 document.getElementById('import-select-all').addEventListener('change', (e) => {
                     document.querySelectorAll('.import-checkbox').forEach(box => box.checked = e.target.checked);
                 });
@@ -2327,20 +2227,11 @@
             document.getElementById('confirm-import-btn').addEventListener('click', async () => {
                 const checkboxes = document.querySelectorAll('.import-checkbox:checked');
                 const transactionsToImport = Array.from(checkboxes).map(box => AppState.importData.mapped[box.dataset.index]);
-
-                if (transactionsToImport.length === 0) {
-                    showToast("Nenhuma transação selecionada para importar.", true);
-                    return;
-                }
-
+                if (transactionsToImport.length === 0) { showToast("Nenhuma transação selecionada.", true); return; }
                 const button = document.getElementById('confirm-import-btn');
                 const buttonText = document.getElementById('import-button-text');
                 const spinner = document.getElementById('import-spinner');
-
-                button.disabled = true;
-                buttonText.classList.add('hidden');
-                spinner.classList.remove('hidden');
-
+                button.disabled = true; buttonText.classList.add('hidden'); spinner.classList.remove('hidden');
                 try {
                     const batch = writeBatch(db);
                     transactionsToImport.forEach(tx => {
@@ -2348,15 +2239,13 @@
                         batch.set(docRef, tx);
                     });
                     await batch.commit();
-                    showToast(`${transactionsToImport.length} transações importadas com sucesso!`);
+                    showToast(`${transactionsToImport.length} transações importadas!`);
                     closeModal('import-modal');
                 } catch (error) {
                     console.error("Erro ao importar transações:", error);
-                    showToast("Ocorreu um erro ao salvar as transações.", true);
+                    showToast("Erro ao salvar as transações.", true);
                 } finally {
-                    button.disabled = false;
-                    buttonText.classList.remove('hidden');
-                    spinner.classList.add('hidden');
+                    button.disabled = false; buttonText.classList.remove('hidden'); spinner.classList.add('hidden');
                 }
             });
 
