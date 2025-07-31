@@ -222,7 +222,7 @@
                 </div>
             </aside>
             
-            <div class="flex-1 flex flex-col">
+            <div class="flex-1 flex flex-col w-0">
                 <header class="bg-slate-900/80 backdrop-blur-sm sticky top-0 z-10 border-b border-slate-800 p-4 flex justify-between items-center md:hidden">
                     <h1 class="text-xl font-extrabold text-white">Finan<span class="text-purple-400">Track</span></h1>
                     
@@ -231,14 +231,14 @@
                             <div id="mobile-user-avatar-container"></div>
                         </button>
                         <div id="user-menu-popover" class="hidden absolute top-full right-0 mt-2 w-48 bg-slate-800 border border-slate-700 rounded-lg shadow-lg z-50 p-2">
-                              <div class="px-2 py-2 border-b border-slate-700">
-                                  <p id="mobile-user-greeting" class="font-semibold text-white truncate"></p>
-                                  <p id="mobile-user-email" class="text-sm text-slate-400 truncate"></p>
-                              </div>
-                              <button id="mobile-logout-btn" class="w-full flex items-center gap-2 text-red-400 hover:bg-red-500/20 transition-colors p-2 rounded-md mt-1 text-sm">
-                                  <i data-feather="log-out" class="w-4 h-4"></i>
-                                  <span>Sair</span>
-                              </button>
+                                <div class="px-2 py-2 border-b border-slate-700">
+                                    <p id="mobile-user-greeting" class="font-semibold text-white truncate"></p>
+                                    <p id="mobile-user-email" class="text-sm text-slate-400 truncate"></p>
+                                </div>
+                                <button id="mobile-logout-btn" class="w-full flex items-center gap-2 text-red-400 hover:bg-red-500/20 transition-colors p-2 rounded-md mt-1 text-sm">
+                                    <i data-feather="log-out" class="w-4 h-4"></i>
+                                    <span>Sair</span>
+                                </button>
                         </div>
                     </div>
                 </header>
@@ -270,21 +270,21 @@
                         </section>
                         
                         <section id="goals-section" class="mb-8 fade-in-up" style="animation-delay: 500ms;">
-                             <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
-                                 <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
-                                     <h3 class="text-lg font-semibold text-white">🎯 Metas de Economia</h3>
-                                     <button id="add-goal-btn" class="bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center gap-2 text-sm">
-                                         <i data-feather="plus" class="w-4 h-4"></i>
-                                         Nova Meta
-                                     </button>
-                                 </div>
-                                 <div id="goals-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                 </div>
-                                 <p id="no-goals-msg" class="text-center text-slate-500 py-12 hidden">
-                                     <i data-feather="target" class="mx-auto w-12 h-12 mb-2"></i>
-                                     Nenhuma meta definida. Que tal criar uma agora?
-                                 </p>
-                             </div>
+                               <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                                   <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+                                       <h3 class="text-lg font-semibold text-white">🎯 Metas de Economia</h3>
+                                       <button id="add-goal-btn" class="bg-purple-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center gap-2 text-sm">
+                                           <i data-feather="plus" class="w-4 h-4"></i>
+                                           Nova Meta
+                                       </button>
+                                   </div>
+                                   <div id="goals-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                   </div>
+                                   <p id="no-goals-msg" class="text-center text-slate-500 py-12 hidden">
+                                       <i data-feather="target" class="mx-auto w-12 h-12 mb-2"></i>
+                                       Nenhuma meta definida. Que tal criar uma agora?
+                                   </p>
+                               </div>
                         </section>
 
                         <section class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
@@ -298,10 +298,10 @@
                             </div>
                         </section>
                         <section class="mb-8">
-                             <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 800ms;">
-                                 <h3 class="text-lg font-semibold mb-4 text-white">Evolução do Saldo Total (com Previsão)</h3>
-                                 <div class="chart-container"><canvas id="balance-trend-chart"></canvas></div>
-                             </div>
+                               <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700 fade-in-up" style="animation-delay: 800ms;">
+                                   <h3 class="text-lg font-semibold mb-4 text-white">Evolução do Saldo Total (com Previsão)</h3>
+                                   <div class="chart-container"><canvas id="balance-trend-chart"></canvas></div>
+                               </div>
                         </section>
                     </div>
 
@@ -379,8 +379,8 @@
                                     </tbody>
                                 </table>
                                <p id="no-transactions-msg" class="text-center text-slate-500 py-12">
-                                 <i data-feather="ghost" class="mx-auto w-12 h-12 mb-2"></i>
-                                 Nenhum lançamento encontrado.
+                                   <i data-feather="ghost" class="mx-auto w-12 h-12 mb-2"></i>
+                                   Nenhum lançamento encontrado.
                                </p>
                             </div>
                         </section>
@@ -642,14 +642,14 @@
                      </div>
                  </div>
                  <div class="mb-4">
-                      <label for="goal-target-date" class="block text-sm font-medium text-slate-400 mb-1">Data Alvo</label>
-                     <input type="date" id="goal-target-date" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                     <label for="goal-target-date" class="block text-sm font-medium text-slate-400 mb-1">Data Alvo</label>
+                    <input type="date" id="goal-target-date" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
                  </div>
                  <div id="goal-categories-container" class="mb-4 hidden">
-                      <label for="goal-categories" class="block text-sm font-medium text-slate-400 mb-1">Categorias para Limitar Gastos</label>
-                      <select id="goal-categories" multiple class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white h-32">
-                      </select>
-                      <p class="text-xs text-slate-500 mt-1">Segure Ctrl (ou Cmd) para selecionar múltiplas categorias.</p>
+                     <label for="goal-categories" class="block text-sm font-medium text-slate-400 mb-1">Categorias para Limitar Gastos</label>
+                     <select id="goal-categories" multiple class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white h-32">
+                     </select>
+                     <p class="text-xs text-slate-500 mt-1">Segure Ctrl (ou Cmd) para selecionar múltiplas categorias.</p>
                  </div>
                  <div class="flex justify-end gap-4 mt-6">
                      <button type="button" id="cancel-goal" class="px-6 py-2 border border-slate-600 rounded-lg font-semibold hover:bg-slate-700 text-slate-300">Cancelar</button>
@@ -693,11 +693,11 @@
                         </select>
                     </div>
                     <div>
-                        <label for="import-decimal-separator" class="block text-sm font-medium text-slate-400 mb-1">Separador Decimal</label>
-                         <select id="import-decimal-separator" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white">
-                             <option value=".">Ponto (.)</option>
-                             <option value="," selected>Vírgula (,)</option>
-                         </select>
+                       <label for="import-decimal-separator" class="block text-sm font-medium text-slate-400 mb-1">Separador Decimal</label>
+                        <select id="import-decimal-separator" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg text-white">
+                            <option value=".">Ponto (.)</option>
+                            <option value="," selected>Vírgula (,)</option>
+                        </select>
                     </div>
                 </div>
                 <div class="flex justify-end gap-4 mt-6">
@@ -711,12 +711,12 @@
                  <div class="max-h-64 overflow-y-auto border border-slate-700 rounded-lg">
                      <table class="w-full text-left text-sm">
                          <thead class="sticky top-0 bg-slate-800">
-                              <tr class="border-b border-slate-600">
+                             <tr class="border-b border-slate-600">
                                  <th class="p-2"><input type="checkbox" id="import-select-all" checked></th>
                                  <th class="p-2 font-semibold">Data</th>
                                  <th class="p-2 font-semibold">Descrição</th>
                                  <th class="p-2 font-semibold text-right">Valor</th>
-                              </tr>
+                             </tr>
                          </thead>
                          <tbody id="import-review-tbody">
                          </tbody>
@@ -1135,8 +1135,8 @@
             function renderAccountListInModal() {
                 const listContainer = document.getElementById('account-list');
                 if (AppState.accounts.length === 0) {
-                        listContainer.innerHTML = `<p class="text-slate-500 text-center">Nenhuma conta encontrada.</p>`;
-                                return;
+                             listContainer.innerHTML = `<p class="text-slate-500 text-center">Nenhuma conta encontrada.</p>`;
+                                     return;
                 }
                 listContainer.innerHTML = AppState.accounts.map(account => `
                     <div class="flex justify-between items-center p-2 bg-slate-700 rounded-lg">
