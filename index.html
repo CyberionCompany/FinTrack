@@ -387,23 +387,37 @@
 
                     <div id="accounts-page" class="app-page hidden">
                          <section id="page-header-accounts" class="mb-8 flex flex-col sm:flex-row justify-between items-center gap-4">
-                             <h2 class="text-3xl font-bold text-white">Contas e Carteiras</h2>
+                             <h2 class="text-3xl font-bold text-white">Contas e Cartões</h2>
                              <button id="add-account-btn" class="w-full sm:w-auto bg-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-purple-700 transition-colors flex items-center justify-center gap-2 shadow-lg shadow-purple-900/50">
                                  <i data-feather="plus" class="w-5 h-5"></i>
-                                 Nova Conta
+                                 Nova Conta/Cartão
                              </button>
                          </section>
 
-                         <section id="accounts-section" class="mb-8 fade-in-up">
+                         <section class="mb-8 fade-in-up">
+                            <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
+                                <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
+                                    <h3 class="text-lg font-semibold text-white">💳 Cartões de Crédito</h3>
+                                </div>
+                                <div id="credit-cards-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                </div>
+                                <p id="no-credit-cards-msg" class="text-center text-slate-500 py-12 hidden">
+                                    <i data-feather="credit-card" class="mx-auto w-12 h-12 mb-2"></i>
+                                    Nenhum cartão de crédito cadastrado.
+                                </p>
+                            </div>
+                         </section>
+
+                         <section class="fade-in-up">
                              <div class="bg-slate-800 p-6 rounded-2xl border border-slate-700">
                                  <div class="flex flex-col sm:flex-row justify-between items-center mb-4 gap-4">
-                                     <h3 class="text-lg font-semibold text-white">💰 Saldo Consolidado</h3>
+                                     <h3 class="text-lg font-semibold text-white">💰 Contas e Carteiras</h3>
                                      <p id="total-balance-all-accounts" class="text-xl font-bold text-slate-300">Saldo Total: R$ 0,00</p>
                                  </div>
                                  <div id="accounts-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                  </div>
                                  <p id="no-accounts-msg" class="text-center text-slate-500 py-12 hidden">
-                                     <i data-feather="credit-card" class="mx-auto w-12 h-12 mb-2"></i>
+                                     <i data-feather="dollar-sign" class="mx-auto w-12 h-12 mb-2"></i>
                                      Nenhuma conta cadastrada. Adicione uma para começar!
                                  </p>
                              </div>
@@ -512,7 +526,7 @@
                 
                 <div id="income-expense-fields">
                     <div class="mb-4">
-                        <label for="transaction-account" class="block text-sm font-medium text-slate-400 mb-1">Conta</label>
+                        <label for="transaction-account" class="block text-sm font-medium text-slate-400 mb-1">Conta / Cartão</label>
                         <select id="transaction-account" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white"></select>
                     </div>
                     <div class="mb-4">
@@ -581,37 +595,48 @@
             </div>
             
             <div class="mb-6">
-                <h4 class="text-lg font-semibold text-white mb-2">Contas Existentes</h4>
+                <h4 class="text-lg font-semibold text-white mb-2">Contas e Cartões Existentes</h4>
                 <div id="account-list" class="space-y-2 max-h-48 overflow-y-auto pr-2">
                 </div>
             </div>
 
             <div class="border-t border-slate-700 pt-6">
-                <h4 id="account-form-title" class="text-lg font-semibold text-white mb-4">Adicionar Nova Conta</h4>
+                <h4 id="account-form-title" class="text-lg font-semibold text-white mb-4">Adicionar Novo</h4>
                 <form id="account-form">
                     <input type="hidden" id="account-id">
                     <div class="mb-4">
-                        <label for="account-name" class="block text-sm font-medium text-slate-400 mb-1">Nome da Conta</label>
-                        <input type="text" id="account-name" placeholder="Ex: NuConta, Carteira" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                        <label for="account-name" class="block text-sm font-medium text-slate-400 mb-1">Nome da Conta / Cartão</label>
+                        <input type="text" id="account-name" placeholder="Ex: NuConta, Inter, Nubank" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
                     </div>
                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
                          <div>
                              <label for="account-type" class="block text-sm font-medium text-slate-400 mb-1">Tipo</label>
                              <select id="account-type" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
                                  <option value="Conta Corrente">Conta Corrente</option>
+                                 <option value="Cartão de Crédito">Cartão de Crédito</option>
                                  <option value="Carteira">Carteira</option>
                                  <option value="Investimento">Investimento</option>
                                  <option value="Outro">Outro</option>
                              </select>
                          </div>
                          <div>
-                             <label for="account-initial-balance" class="block text-sm font-medium text-slate-400 mb-1">Saldo Inicial (R$)</label>
+                             <label for="account-initial-balance" id="account-initial-balance-label" class="block text-sm font-medium text-slate-400 mb-1">Saldo Inicial (R$)</label>
                              <input type="number" step="0.01" id="account-initial-balance" value="0" required class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
                          </div>
                      </div>
+                     <div id="credit-card-fields" class="hidden grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label for="card-closing-day" class="block text-sm font-medium text-slate-400 mb-1">Dia de Fechamento</label>
+                            <input type="number" id="card-closing-day" min="1" max="31" placeholder="Ex: 28" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                        </div>
+                        <div>
+                            <label for="card-payment-day" class="block text-sm font-medium text-slate-400 mb-1">Dia de Vencimento</label>
+                            <input type="number" id="card-payment-day" min="1" max="31" placeholder="Ex: 7" class="w-full px-4 py-2 bg-slate-700 border border-slate-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                        </div>
+                    </div>
                     <div class="flex justify-end gap-4 mt-6">
                         <button type="button" id="cancel-account-edit" class="px-6 py-2 border border-slate-600 rounded-lg font-semibold hover:bg-slate-700 text-slate-300 hidden">Cancelar Edição</button>
-                        <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700">Salvar Conta</button>
+                        <button type="submit" class="px-6 py-2 bg-purple-600 text-white rounded-lg font-semibold hover:bg-purple-700">Salvar</button>
                     </div>
                 </form>
             </div>
@@ -1085,70 +1110,108 @@
             
             // --- CONTAS ---
             function renderAccounts() {
-                const container = document.getElementById('accounts-container');
+                const accountsContainer = document.getElementById('accounts-container');
+                const creditCardsContainer = document.getElementById('credit-cards-container');
                 const noAccountsMsg = document.getElementById('no-accounts-msg');
+                const noCreditCardsMsg = document.getElementById('no-credit-cards-msg');
                 const totalBalanceEl = document.getElementById('total-balance-all-accounts');
 
-                if (AppState.accounts.length === 0) {
-                    container.innerHTML = '';
+                const regularAccounts = AppState.accounts.filter(a => !a.isCreditCard);
+                const creditCardAccounts = AppState.accounts.filter(a => a.isCreditCard);
+
+                // Renderiza Contas e Carteiras
+                if (regularAccounts.length === 0) {
+                    accountsContainer.innerHTML = '';
                     noAccountsMsg.classList.remove('hidden');
-                    totalBalanceEl.textContent = 'Saldo Total: R$ 0,00';
-                    return;
+                } else {
+                    noAccountsMsg.classList.add('hidden');
+                    accountsContainer.innerHTML = regularAccounts.map(account => {
+                        const currentBalance = calculateAccountBalance(account.id);
+                        return `
+                            <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <p class="font-bold text-white">${account.name}</p>
+                                        <p class="text-sm text-slate-400">${account.type}</p>
+                                    </div>
+                                    <p class="text-lg font-semibold ${currentBalance >= 0 ? 'text-green-400' : 'text-red-400'}">${formatCurrency(currentBalance)}</p>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
+                }
+
+                // Renderiza Cartões de Crédito
+                if (creditCardAccounts.length === 0) {
+                    creditCardsContainer.innerHTML = '';
+                    noCreditCardsMsg.classList.remove('hidden');
+                } else {
+                    noCreditCardsMsg.classList.add('hidden');
+                    creditCardsContainer.innerHTML = creditCardAccounts.map(card => {
+                        const currentBalance = calculateAccountBalance(card.id);
+                        return `
+                            <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600 flex flex-col justify-between">
+                                <div>
+                                    <div class="flex justify-between items-start">
+                                        <p class="font-bold text-white">${card.name}</p>
+                                        <p class="text-lg font-semibold text-red-400">${formatCurrency(currentBalance)}</p>
+                                    </div>
+                                    <p class="text-sm text-slate-400 -mt-1">Fatura Atual</p>
+                                </div>
+                                <div class="flex justify-between items-center text-xs text-slate-400 mt-3 pt-2 border-t border-slate-600/50">
+                                    <span>Fecha dia: <b>${card.closingDay || 'N/A'}</b></span>
+                                    <span>Vence dia: <b>${card.paymentDay || 'N/A'}</b></span>
+                                </div>
+                            </div>
+                        `;
+                    }).join('');
                 }
                 
-                noAccountsMsg.classList.add('hidden');
+                // Calcula e exibe o saldo consolidado apenas das contas regulares
+                const totalRegularBalance = regularAccounts.reduce((sum, acc) => sum + calculateAccountBalance(acc.id), 0);
+                totalBalanceEl.textContent = `Saldo Consolidado: ${formatCurrency(totalRegularBalance)}`;
+            }
+
+            function calculateAccountBalance(accountId) {
+                const account = AppState.accounts.find(a => a.id === accountId);
+                if (!account) return 0;
                 
-                let totalBalanceAll = 0;
-
-                container.innerHTML = AppState.accounts.map(account => {
-                    let currentBalance = account.initialBalance;
-                    AppState.transactions.forEach(tx => {
-                        if (tx.type === 'income' && tx.accountId === account.id) {
-                            currentBalance += tx.amount;
-                        } else if (tx.type === 'expense' && tx.accountId === account.id) {
-                            currentBalance -= tx.amount;
-                        } else if (tx.type === 'transfer') {
-                            if (tx.sourceAccountId === account.id) currentBalance -= tx.amount;
-                            if (tx.destinationAccountId === account.id) currentBalance += tx.amount;
-                        }
-                    });
-                    
-                    totalBalanceAll += currentBalance;
-                    
-                    return `
-                        <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
-                            <div class="flex justify-between items-center">
-                                <div>
-                                    <p class="font-bold text-white">${account.name}</p>
-                                    <p class="text-sm text-slate-400">${account.type}</p>
-                                </div>
-                                <p class="text-lg font-semibold ${currentBalance >= 0 ? 'text-green-400' : 'text-red-400'}">${formatCurrency(currentBalance)}</p>
-                            </div>
-                        </div>
-                    `;
-                }).join('');
-
-                totalBalanceEl.textContent = `Saldo Total: ${formatCurrency(totalBalanceAll)}`;
+                let balance = account.initialBalance;
+                AppState.transactions.forEach(tx => {
+                    if (tx.type === 'income' && tx.accountId === accountId) {
+                        balance += tx.amount;
+                    } else if (tx.type === 'expense' && tx.accountId === accountId) {
+                        balance -= tx.amount;
+                    } else if (tx.type === 'transfer') {
+                        if (tx.sourceAccountId === accountId) balance -= tx.amount;
+                        if (tx.destinationAccountId === accountId) balance += tx.amount;
+                    }
+                });
+                return balance;
             }
 
             function renderAccountListInModal() {
                 const listContainer = document.getElementById('account-list');
                 if (AppState.accounts.length === 0) {
-                                  listContainer.innerHTML = `<p class="text-slate-500 text-center">Nenhuma conta encontrada.</p>`;
-                                        return;
+                    listContainer.innerHTML = `<p class="text-slate-500 text-center">Nenhuma conta encontrada.</p>`;
+                    return;
                 }
-                listContainer.innerHTML = AppState.accounts.map(account => `
-                    <div class="flex justify-between items-center p-2 bg-slate-700 rounded-lg">
-                         <div>
-                             <span class="font-medium text-slate-200">${account.name}</span>
-                             <span class="text-xs text-slate-400 ml-2">(${formatCurrency(account.initialBalance)})</span>
-                         </div>
-                         <div class="flex items-center gap-3">
-                             <button data-id="${account.id}" class="edit-account-btn text-slate-500 hover:text-purple-400 transition-colors"><i data-feather="edit" class="w-4 h-4"></i></button>
-                             <button data-id="${account.id}" class="delete-account-btn text-slate-500 hover:text-red-500 transition-colors"><i data-feather="trash-2" class="w-4 h-4"></i></button>
-                         </div>
-                    </div>
-                `).join('');
+                listContainer.innerHTML = AppState.accounts.map(account => {
+                    const typeTag = account.isCreditCard 
+                        ? `<span class="text-xs bg-blue-500/20 text-blue-300 px-2 py-0.5 rounded-full ml-2">Cartão</span>`
+                        : '';
+                    return `
+                        <div class="flex justify-between items-center p-2 bg-slate-700 rounded-lg">
+                            <div>
+                                <span class="font-medium text-slate-200">${account.name}</span>
+                                ${typeTag}
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <button data-id="${account.id}" class="edit-account-btn text-slate-500 hover:text-purple-400 transition-colors"><i data-feather="edit" class="w-4 h-4"></i></button>
+                                <button data-id="${account.id}" class="delete-account-btn text-slate-500 hover:text-red-500 transition-colors"><i data-feather="trash-2" class="w-4 h-4"></i></button>
+                            </div>
+                        </div>
+                    `}).join('');
                 feather.replace();
             }
             
@@ -1157,30 +1220,45 @@
                 const form = e.target;
                 const id = form['account-id'].value;
                 const name = form['account-name'].value.trim();
+                const type = form['account-type'].value;
 
                 if (!name) {
                     showToast('O nome da conta é obrigatório.', true);
                     return;
                 }
 
-                const accountData = {
+                let accountData = {
                     name: name,
-                    type: form['account-type'].value,
+                    type: type,
                     initialBalance: parseFloat(form['account-initial-balance'].value) || 0,
+                    isCreditCard: type === 'Cartão de Crédito',
+                    closingDay: null,
+                    paymentDay: null
                 };
+
+                if (accountData.isCreditCard) {
+                    const closingDay = parseInt(form['card-closing-day'].value, 10);
+                    const paymentDay = parseInt(form['card-payment-day'].value, 10);
+                    if (!closingDay || !paymentDay) {
+                        showToast('Para cartão de crédito, os dias de fechamento e vencimento são obrigatórios.', true);
+                        return;
+                    }
+                    accountData.closingDay = closingDay;
+                    accountData.paymentDay = paymentDay;
+                }
                 
                 try {
                     if (id) {
                         await updateDoc(doc(db, `users/${AppState.currentUser.uid}/accounts`, id), accountData);
-                        showToast('Conta atualizada com sucesso!');
+                        showToast('Conta/Cartão atualizado com sucesso!');
                     } else {
                         await addDoc(collection(db, `users/${AppState.currentUser.uid}/accounts`), accountData);
-                        showToast('Conta adicionada com sucesso!');
+                        showToast('Conta/Cartão adicionado com sucesso!');
                     }
                     resetAccountForm();
                 } catch(error) {
                     console.error("Erro ao salvar conta:", error);
-                    showToast('Erro ao salvar conta.', true);
+                    showToast('Erro ao salvar conta/cartão.', true);
                 }
             });
 
@@ -1455,17 +1533,24 @@
                     ctx.font = '16px Inter';
                     ctx.fillText(message, ctx.canvas.width / 2, ctx.canvas.height / 2);
                 };
+                
+                const regularAccounts = AppState.accounts.filter(a => !a.isCreditCard);
+                const regularTransactions = transactions.filter(tx => {
+                    if(tx.type === 'transfer') return true;
+                    return regularAccounts.some(acc => acc.id === tx.accountId);
+                });
 
-                if (!transactions || transactions.length === 0) {
+
+                if (!regularTransactions || regularTransactions.length === 0) {
                     drawMessage('Adicione transações para ver a tendência do saldo.');
                     return;
                 }
 
-                // 1. Calcular o saldo inicial total de todas as contas
-                const initialBalance = AppState.accounts.reduce((sum, acc) => sum + (acc.initialBalance || 0), 0);
+                // 1. Calcular o saldo inicial total das contas regulares
+                const initialBalance = regularAccounts.reduce((sum, acc) => sum + (acc.initialBalance || 0), 0);
                 
                 // 2. Ordenar transações por data
-                const sortedTx = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
+                const sortedTx = [...regularTransactions].sort((a, b) => new Date(a.date) - new Date(b.date));
 
                 // 3. Agregar as mudanças de saldo por dia
                 const changesByDay = sortedTx.reduce((acc, tx) => {
@@ -1549,8 +1634,6 @@
                         tension: 0.1,
                         pointRadius: 0
                     });
-                } else {
-                     drawMessage('Adicione transações em dias diferentes para criar uma previsão.');
                 }
                 
                 // 6. Renderizar o gráfico
@@ -1688,9 +1771,11 @@
                 const form = document.getElementById('account-form');
                 form.reset();
                 form['account-id'].value = '';
-                document.getElementById('account-form-title').textContent = 'Adicionar Nova Conta';
+                document.getElementById('account-form-title').textContent = 'Adicionar Novo';
                 document.getElementById('account-initial-balance').disabled = false;
                 document.getElementById('cancel-account-edit').classList.add('hidden');
+                document.getElementById('credit-card-fields').classList.add('hidden');
+                document.getElementById('account-initial-balance-label').textContent = 'Saldo Inicial (R$)';
             }
 
             function openTransactionModal(transaction = null) {
@@ -1735,11 +1820,20 @@
                     document.getElementById('transfer-destination-account'),
                     document.getElementById('import-account-select')
                 ];
-                const optionsHtml = AppState.accounts.map(a => `<option value="${a.id}">${a.name}</option>`).join('');
+                // Para transferências, filtre para não mostrar cartões de crédito
+                const regularAccountsHtml = AppState.accounts
+                    .filter(a => !a.isCreditCard)
+                    .map(a => `<option value="${a.id}">${a.name}</option>`).join('');
+                const allAccountsHtml = AppState.accounts.map(a => `<option value="${a.id}">${a.name}</option>`).join('');
+                
                 selects.forEach(select => {
                     if (select) {
                         const firstOption = select.querySelector('option[value=""]');
-                        select.innerHTML = (firstOption ? firstOption.outerHTML : '') + optionsHtml;
+                        if (select.id === 'transfer-source-account' || select.id === 'transfer-destination-account') {
+                            select.innerHTML = (firstOption ? firstOption.outerHTML : '') + regularAccountsHtml;
+                        } else {
+                            select.innerHTML = (firstOption ? firstOption.outerHTML : '') + allAccountsHtml;
+                        }
                     }
                 });
             }
@@ -1825,6 +1919,16 @@
                         form['account-name'].value = accountToEdit.name;
                         form['account-type'].value = accountToEdit.type;
                         form['account-initial-balance'].value = accountToEdit.initialBalance;
+                        
+                        // Habilitar/desabilitar campos de cartão de crédito
+                        const typeSelect = document.getElementById('account-type');
+                        typeSelect.dispatchEvent(new Event('change'));
+
+                        if(accountToEdit.isCreditCard) {
+                            form['card-closing-day'].value = accountToEdit.closingDay;
+                            form['card-payment-day'].value = accountToEdit.paymentDay;
+                        }
+
                         form['account-initial-balance'].disabled = true;
                         document.getElementById('account-form-title').textContent = 'Editar Conta';
                         document.getElementById('cancel-account-edit').classList.remove('hidden');
@@ -1833,7 +1937,7 @@
                 }
                 
                 const deleteAccountBtn = e.target.closest('.delete-account-btn');
-                if (deleteAccountBtn && confirm('Atenção: Excluir esta conta irá apagar TODAS as transações associadas a ela. Deseja continuar?')) {
+                if (deleteAccountBtn && confirm('Atenção: Excluir esta conta/cartão irá apagar TODAS as transações associadas a ela. Deseja continuar?')) {
                     try {
                         const accountId = deleteAccountBtn.dataset.id;
                         const batch = writeBatch(db);
@@ -1852,11 +1956,11 @@
                         batch.delete(accountRef);
                         
                         await batch.commit();
-                        showToast('Conta e transações associadas foram excluídas.');
+                        showToast('Conta/Cartão e transações associadas foram excluídos.');
 
                     } catch(error) {
                         console.error('Erro ao excluir conta:', error);
-                        showToast('Erro ao excluir a conta.', true);
+                        showToast('Erro ao excluir a conta/cartão.', true);
                     }
                 }
 
@@ -1884,6 +1988,13 @@
             document.getElementById('close-account-modal').addEventListener('click', () => closeModal('account-modal'));
             document.getElementById('cancel-account-edit').addEventListener('click', resetAccountForm);
 
+            // Listener para mostrar/ocultar campos de cartão de crédito
+            document.getElementById('account-type').addEventListener('change', (e) => {
+                const isCreditCard = e.target.value === 'Cartão de Crédito';
+                document.getElementById('credit-card-fields').classList.toggle('hidden', !isCreditCard);
+                const balanceLabel = document.getElementById('account-initial-balance-label');
+                balanceLabel.textContent = isCreditCard ? 'Fatura Atual (R$)' : 'Saldo Inicial (R$)';
+            });
 
             document.getElementById('is-recurring').addEventListener('change', (e) => {
                 document.getElementById('recurring-options').classList.toggle('hidden', !e.target.checked);
