@@ -28,7 +28,6 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
-        /* A CLASSE PROBLEMÁTICA FOI REMOVIDA DAQUI */
         /* Estilo para o scrollbar no modo escuro */
         ::-webkit-scrollbar {
             width: 8px;
@@ -773,15 +772,15 @@
             // =================================================================================
             // CONFIGURAÇÃO DO FIREBASE
             // =================================================================================
-           const firebaseConfig = {
-             apiKey: "AIzaSyC5bC8DJiJIFddpnrFcRkeVILiMyQ-4iJs",
-             authDomain: "fintrack-f8302.firebaseapp.com",
-             projectId: "fintrack-f8302",
-             storageBucket: "fintrack-f8302.appspot.com",
-             messagingSenderId: "888846208929",
-             appId: "1:888846208929:web:d131163e099a5e79bb45e0",
-             measurementId: "G-KSVWFJ8F09"
-           };
+            const firebaseConfig = {
+              apiKey: "AIzaSyC5bC8DJiJIFddpnrFcRkeVILiMyQ-4iJs",
+              authDomain: "fintrack-f8302.firebaseapp.com",
+              projectId: "fintrack-f8302",
+              storageBucket: "fintrack-f8302.appspot.com",
+              messagingSenderId: "888846208929",
+              appId: "1:888846208929:web:d131163e099a5e79bb45e0",
+              measurementId: "G-KSVWFJ8F09"
+            };
             
             const app = initializeApp(firebaseConfig);
             const auth = getAuth(app);
@@ -1135,8 +1134,8 @@
             function renderAccountListInModal() {
                 const listContainer = document.getElementById('account-list');
                 if (AppState.accounts.length === 0) {
-                             listContainer.innerHTML = `<p class="text-slate-500 text-center">Nenhuma conta encontrada.</p>`;
-                                     return;
+                                  listContainer.innerHTML = `<p class="text-slate-500 text-center">Nenhuma conta encontrada.</p>`;
+                                        return;
                 }
                 listContainer.innerHTML = AppState.accounts.map(account => `
                     <div class="flex justify-between items-center p-2 bg-slate-700 rounded-lg">
@@ -1279,7 +1278,7 @@
                 const isRecurring = form['is-recurring'].checked;
 
                 let transactionData = {
-                    amount: parseFloat(form['transaction-amount'].value),
+                    amount: parseFloat(form['transaction-amount'].value) || 0,
                     description: form['transaction-description'].value,
                     date: form['transaction-date'].value,
                     type: type,
@@ -1406,7 +1405,7 @@
                 for (let i = 0; i < 6; i++) {
                     const date = new Date(sixMonthsAgo);
                     date.setMonth(date.getMonth() + i);
-                    data.labels.push(date.toLocaleString('default', { month: 'short', year: '2-digit' }));
+                    data.labels.push(date.toLocaleString('pt-BR', { month: 'short'}));
                     data.incomes.push(0);
                     data.expenses.push(0);
                 }
@@ -1442,75 +1441,148 @@
                 });
             }
             
+            // =================================================================================
+            // FUNÇÃO DO GRÁFICO CORRIGIDA
+            // =================================================================================
             function updateBalanceTrendChart(transactions) {
                 const ctx = document.getElementById('balance-trend-chart').getContext('2d');
                 if (AppState.charts.balanceTrend) AppState.charts.balanceTrend.destroy();
 
-                if (transactions.length < 2) {
+                const drawMessage = (message) => {
                     ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
                     ctx.fillStyle = '#64748b';
                     ctx.textAlign = 'center';
                     ctx.font = '16px Inter';
-                    ctx.fillText('Adicione mais transações para ver a tendência.', ctx.canvas.width / 2, ctx.canvas.height / 2);
+                    ctx.fillText(message, ctx.canvas.width / 2, ctx.canvas.height / 2);
+                };
+
+                if (!transactions || transactions.length === 0) {
+                    drawMessage('Adicione transações para ver a tendência do saldo.');
                     return;
                 }
 
+                // 1. Calcular o saldo inicial total de todas as contas
+                const initialBalance = AppState.accounts.reduce((sum, acc) => sum + (acc.initialBalance || 0), 0);
+                
+                // 2. Ordenar transações por data
                 const sortedTx = [...transactions].sort((a, b) => new Date(a.date) - new Date(b.date));
-                let cumulativeBalance = AppState.accounts.reduce((sum, acc) => sum + acc.initialBalance, 0);
 
-                const balanceDataByDate = sortedTx.reduce((acc, tx) => {
+                // 3. Agregar as mudanças de saldo por dia
+                const changesByDay = sortedTx.reduce((acc, tx) => {
                     let change = 0;
                     if (tx.type === 'income') change = tx.amount;
                     else if (tx.type === 'expense') change = -tx.amount;
-                    
+                    // Transferências são neutras para o saldo total, então são ignoradas
                     acc[tx.date] = (acc[tx.date] || 0) + change;
                     return acc;
                 }, {});
 
-                const dates = Object.keys(balanceDataByDate).sort();
-                const balanceData = dates.map(date => {
-                    cumulativeBalance += balanceDataByDate[date];
-                    return { x: new Date(date + 'T00:00:00'), y: cumulativeBalance };
+                const sortedDates = Object.keys(changesByDay).sort((a, b) => new Date(a) - new Date(b));
+                
+                // 4. Construir o array de dados para o gráfico
+                const balanceData = [];
+                let cumulativeBalance = initialBalance;
+
+                // Adicionar ponto inicial (saldo antes da primeira transação)
+                const firstTxDate = new Date(sortedDates[0] + 'T00:00:00');
+                balanceData.push({ x: new Date(firstTxDate.getTime() - 86400000), y: cumulativeBalance });
+
+                // Adicionar um ponto para cada dia com transações
+                sortedDates.forEach(date => {
+                    cumulativeBalance += changesByDay[date];
+                    balanceData.push({ x: new Date(date + 'T00:00:00'), y: cumulativeBalance });
                 });
 
-                const n = balanceData.length;
-                if (n < 2) return; 
+                const datasets = [{
+                    label: 'Saldo Histórico',
+                    data: balanceData,
+                    borderColor: '#a78bfa',
+                    tension: 0.1,
+                    pointBackgroundColor: '#a78bfa',
+                    pointRadius: 2,
+                    fill: true,
+                    backgroundColor: 'rgba(167, 139, 250, 0.1)'
+                }];
 
-                const x = balanceData.map((_, i) => i);
-                const y = balanceData.map(d => d.y);
-                const sumX = x.reduce((a, b) => a + b, 0);
-                const sumY = y.reduce((a, b) => a + b, 0);
-                const sumXY = x.reduce((sum, xi, i) => sum + xi * y[i], 0);
-                const sumXX = x.reduce((sum, xi) => sum + xi * xi, 0);
-                
-                const denominator = (n * sumXX - sumX * sumX);
-                const slope = denominator !== 0 ? (n * sumXY - sumX * sumY) / denominator : 0;
-                const intercept = (sumY - slope * sumX) / n;
+                // 5. Lógica de Previsão (só executa se houver pelo menos 2 pontos de dados)
+                if (balanceData.length >= 2) {
+                    const n = balanceData.length;
+                    const firstDateMs = balanceData[0].x.getTime();
+                    const msInDay = 24 * 60 * 60 * 1000;
 
-                const lastDate = balanceData[n - 1].x;
-                const predictionData = [];
-                for (let i = 1; i <= 30; i++) {
-                    const futureDate = new Date(lastDate);
-                    futureDate.setDate(lastDate.getDate() + i);
-                    const predictedBalance = slope * (n - 1 + i) + intercept;
-                    predictionData.push({ x: futureDate, y: predictedBalance });
+                    // Usar a diferença de dias real para a regressão
+                    const points = balanceData.map(d => ({
+                        x: (d.x.getTime() - firstDateMs) / msInDay,
+                        y: d.y
+                    }));
+
+                    const sumX = points.reduce((sum, p) => sum + p.x, 0);
+                    const sumY = points.reduce((sum, p) => sum + p.y, 0);
+                    const sumXY = points.reduce((sum, p) => sum + p.x * p.y, 0);
+                    const sumXX = points.reduce((sum, p) => sum + p.x * p.x, 0);
+
+                    const denominator = (n * sumXX - sumX * sumX);
+                    const slope = denominator !== 0 ? (n * sumXY - sumX * sumY) / denominator : 0;
+                    const intercept = (sumY - slope * sumX) / n;
+
+                    const predictionData = [];
+                    const lastPoint = points[n - 1];
+                    const lastDate = balanceData[n - 1].x;
+
+                    // Começa a linha de previsão a partir do último ponto real
+                    predictionData.push({ x: lastDate, y: lastPoint.y });
+
+                    // Previsão para os próximos 30 dias
+                    for (let i = 1; i <= 30; i++) {
+                        const futureDate = new Date(lastDate);
+                        futureDate.setDate(lastDate.getDate() + i);
+                        const futureX = lastPoint.x + i;
+                        const predictedBalance = slope * futureX + intercept;
+                        predictionData.push({ x: futureDate, y: predictedBalance });
+                    }
+
+                    datasets.push({
+                        label: 'Previsão de Saldo',
+                        data: predictionData,
+                        borderColor: '#60a5fa',
+                        borderDash: [5, 5],
+                        tension: 0.1,
+                        pointRadius: 0
+                    });
+                } else {
+                     drawMessage('Adicione transações em dias diferentes para criar uma previsão.');
                 }
-
+                
+                // 6. Renderizar o gráfico
                 AppState.charts.balanceTrend = new Chart(ctx, {
                     type: 'line',
-                    data: {
-                        datasets: [
-                            { label: 'Saldo Histórico', data: balanceData, borderColor: '#a78bfa', tension: 0.1, pointBackgroundColor: '#a78bfa', pointRadius: 2, fill: true, backgroundColor: 'rgba(167, 139, 250, 0.1)' },
-                            { label: 'Previsão de Saldo', data: predictionData, borderColor: '#60a5fa', borderDash: [5, 5], tension: 0.1, pointRadius: 0 }
-                        ]
-                    },
+                    data: { datasets: datasets },
                     options: {
-                        responsive: true, maintainAspectRatio: false,
+                        responsive: true,
+                        maintainAspectRatio: false,
                         scales: {
-                            y: { beginAtZero: false, ticks: { color: '#94a3b8' }, grid: { color: '#334155' } },
-                            x: { type: 'time', time: { unit: 'month' }, ticks: { color: '#94a3b8' }, grid: { color: '#334155' } }
+                            y: {
+                                beginAtZero: false,
+                                ticks: { color: '#94a3b8', callback: (value) => formatCurrency(value) },
+                                grid: { color: '#334155' }
+                            },
+                            x: {
+                                type: 'time',
+                                time: { unit: 'month', tooltipFormat: 'dd/MM/yyyy' },
+                                ticks: { color: '#94a3b8' },
+                                grid: { color: '#334155' }
+                            }
                         },
-                        plugins: { legend: { labels: { color: '#cbd5e1' } }, tooltip: { mode: 'index', intersect: false } }
+                        plugins: {
+                            legend: { labels: { color: '#cbd5e1' } },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                callbacks: {
+                                    label: (context) => `${context.dataset.label}: ${formatCurrency(context.parsed.y)}`
+                                }
+                            }
+                        }
                     }
                 });
             }
@@ -1978,12 +2050,17 @@
                     querySnapshot.forEach(docSnap => {
                         const recurringTx = { id: docSnap.id, ...docSnap.data() };
                         
+                        if (!recurringTx.nextDueDate || typeof recurringTx.nextDueDate.toDate !== 'function') {
+                            console.warn("Lançamento recorrente ignorado: nextDueDate inválido.", recurringTx);
+                            return; 
+                        }
+
                         const newTransactionData = {
-                            amount: recurringTx.amount,
+                            amount: recurringTx.amount || 0,
                             categoryId: recurringTx.categoryId,
                             accountId: recurringTx.accountId,
                             date: recurringTx.nextDueDate.toDate().toISOString().slice(0, 10),
-                            description: recurringTx.description,
+                            description: recurringTx.description || 'Lançamento recorrente',
                             type: recurringTx.type,
                         };
                         const newTransactionRef = doc(collection(db, `users/${AppState.currentUser.uid}/transactions`));
@@ -1997,7 +2074,9 @@
                         }
 
                         const recurringDocRef = doc(db, `users/${AppState.currentUser.uid}/recurringTransactions`, recurringTx.id);
-                        if (recurringTx.endDate && nextDueDate > recurringTx.endDate.toDate()) {
+                        const hasValidEndDate = recurringTx.endDate && typeof recurringTx.endDate.toDate === 'function';
+
+                        if (hasValidEndDate && nextDueDate > recurringTx.endDate.toDate()) {
                             batch.update(recurringDocRef, { isActive: false });
                         } else {
                             batch.update(recurringDocRef, { nextDueDate: Timestamp.fromDate(nextDueDate) });
@@ -2005,9 +2084,9 @@
                         generatedCount++;
                     });
 
-                    await batch.commit();
                     if (generatedCount > 0) {
-                        showToast(`${generatedCount} lançamento(s) recorrente(s) foram gerados.`);
+                      await batch.commit();
+                      showToast(`${generatedCount} lançamento(s) recorrente(s) foram gerados.`);
                     }
 
                 } catch (error) {
@@ -2317,7 +2396,7 @@
                        const cleanAmount = (decimalSeparator === ',') 
                             ? rawAmount.replace(/\./g, '').replace(',', '.') 
                             : rawAmount.replace(/,/g, '');
-                       amount = parseFloat(cleanAmount);
+                       amount = parseFloat(cleanAmount) || 0;
                     }
 
                     let date;
