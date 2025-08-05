@@ -1,4 +1,4 @@
- // Importe as funções necessárias dos SDKs
+// Importe as funções necessárias dos SDKs
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { 
             getAuth, 
@@ -165,6 +165,24 @@
             };
 
             // =================================================================================
+            // >> INÍCIO DA CORREÇÃO <<
+            // FUNÇÃO ADICIONADA PARA RECARREGAR ANÚNCIOS EM SPA
+            // =================================================================================
+            const refreshAds = () => {
+                // Atraso para garantir que o contêiner do anúncio está visível no DOM
+                setTimeout(() => {
+                    try {
+                        // Para cada bloco de anúncio visível na página que ainda não foi preenchido pelo AdSense
+                        document.querySelectorAll('.adsbygoogle:not([data-adsbygoogle-status="done"])').forEach(() => {
+                            (adsbygoogle = window.adsbygoogle || []).push({});
+                        });
+                    } catch (e) {
+                        console.error("Erro ao recarregar anúncios:", e);
+                    }
+                }, 300); // Aumentamos o delay para 300ms para maior segurança
+            }
+
+            // =================================================================================
             // LÓGICA DE NAVEGAÇÃO DA SPA
             // =================================================================================
             const pages = document.querySelectorAll('.app-page');
@@ -182,7 +200,11 @@
                 });
                 
                 feather.replace();
+
+                // >> LINHA ADICIONADA PARA CHAMAR A CORREÇÃO <<
+                refreshAds();
             }
+            // >> FIM DA CORREÇÃO <<
             
             document.getElementById('app-screen').addEventListener('click', (e) => {
                 const link = e.target.closest('a.nav-link');
@@ -538,7 +560,8 @@
                 }
                 
                 noTransactionsMsg.classList.add('hidden');
-                tbody.innerHTML = transactions.map(tx => {
+                
+                const transactionRows = transactions.map(tx => {
                     let descriptionHtml;
                     let amountHtml;
                     let categoryName = 'N/A';
@@ -579,7 +602,26 @@
                             </td>
                         </tr>
                     `;
-                }).join('');
+                });
+
+                // Injeta um anúncio a cada 5 transações (exemplo)
+                const adRowHtml = `
+                    <tr class="ad-container-table">
+                        <td colspan="5" class="p-2">
+                            <div>Anúncio Integrado</div>
+                        </td>
+                    </tr>
+                `;
+
+                let finalHtml = '';
+                for (let i = 0; i < transactionRows.length; i++) {
+                    finalHtml += transactionRows[i];
+                    if ((i + 1) % 5 === 0 && i < transactionRows.length -1) { // Adiciona um anúncio a cada 5 itens
+                        finalHtml += adRowHtml;
+                    }
+                }
+
+                tbody.innerHTML = finalHtml;
                 feather.replace();
             }
             
