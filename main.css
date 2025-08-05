@@ -1,74 +1,113 @@
 body {
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        /* Estilo para o scrollbar no modo escuro */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #475569;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #64748b;
-        }
-        .chart-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-        }
-        .auth-bg {
-            background-color: #0f172a;
-            background-image: radial-gradient(#475569 1px, transparent 0);
-            background-size: 30px 30px;
-        }
-        /* Animações */
-        .fade-in-up {
-            animation: fadeInUp 0.5s ease-out forwards;
-            opacity: 0;
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .modal-content {
-            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
-        }
-        .modal.open .modal-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-        .modal .modal-content {
-            transform: scale(0.95);
-            opacity: 0;
-        }
-        /* Estilos da SPA */
-        .app-page {
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/* Estilo para o scrollbar no modo escuro */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #1e293b;
+}
+::-webkit-scrollbar-thumb {
+    background: #475569;
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+.auth-bg {
+    background-color: #0f172a;
+    background-image: radial-gradient(#475569 1px, transparent 0);
+    background-size: 30px 30px;
+}
+/* Animações */
+.fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+}
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.modal-content {
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+.modal.open .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+.modal .modal-content {
+    transform: scale(0.95);
+    opacity: 0;
+}
+/* Estilos da SPA */
+.app-page {
+    animation: fadeIn 0.3s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-        /* Estilos de Navegação */
-        #main-nav .active-link {
-            background-color: #7c3aed; /* purple-600 */
-            color: #ffffff;
-            box-shadow: 0 4px 14px 0 rgb(124 58 237 / 50%);
-        }
-        #bottom-nav .active-link {
-            color: #a78bfa; /* purple-400 */
-        }
+/* Estilos de Navegação */
+#main-nav .active-link {
+    background-color: #7c3aed; /* purple-600 */
+    color: #ffffff;
+    box-shadow: 0 4px 14px 0 rgb(124 58 237 / 50%);
+}
+#bottom-nav .active-link {
+    color: #a78bfa; /* purple-400 */
+}
+
+/* Estilos para Containers de Anúncios */
+.ad-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #334155; /* slate-700 */
+    border: 1px dashed #64748b; /* slate-500 */
+    color: #94a3b8; /* slate-400 */
+    font-size: 0.875rem; /* text-sm */
+    text-align: center;
+    border-radius: 0.75rem; /* rounded-lg */
+    width: 100%;
+    margin-bottom: 1.5rem; /* mb-6 */
+    margin-top: 1.5rem; /* mt-6 */
+}
+.ad-container-sidebar {
+    height: 250px; /* Altura de exemplo para um anúncio vertical */
+}
+.ad-container-banner {
+    min-height: 90px; /* Altura de exemplo para um banner horizontal */
+}
+.ad-container-table {
+    background-color: #1e293b; /* slate-800 */
+}
+.ad-container-table td {
+    border-bottom-width: 0px;
+}
+.ad-container-table div {
+    background-color: #334155;
+    border: 1px dashed #64748b;
+    color: #94a3b8;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    width: 100%;
+}
+
