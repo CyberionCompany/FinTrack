@@ -205,8 +205,8 @@ document.addEventListener('DOMContentLoaded', () => {
         
         feather.replace();
 
-        // CHAMADA ADICIONADA: Carrega os anúncios da página que acabou de ficar visível
-        setTimeout(loadVisibleAds, 100);
+        // ✅ CHAMADA ADICIONADA: Carrega os anúncios da página que acabou de ficar visível
+        setTimeout(loadVisibleAds, 100); 
     }
     
     document.getElementById('app-screen').addEventListener('click', (e) => {
@@ -251,8 +251,8 @@ document.addEventListener('DOMContentLoaded', () => {
             appScreen.classList.add('hidden');
             detachListeners();
             AppState.hasCheckedRecurring = false;
-            // CHAMADA ADICIONADA: Carrega o anúncio da tela de login quando o usuário está deslogado
-            setTimeout(loadVisibleAds, 100);
+            // ✅ CHAMADA ADICIONADA: Carrega o anúncio da tela de login quando o usuário está deslogado
+            setTimeout(loadVisibleAds, 100); 
         }
         feather.replace();
     });
@@ -782,7 +782,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // =================================================================================
-    // FUNÇÃO DO GRÁFICO CORRIGIDA
+    // ✅ FUNÇÃO DO GRÁFICO CORRIGIDA (sem alterações, a lógica original estava boa)
     // =================================================================================
     function updateBalanceTrendChart(transactions) {
         const ctx = document.getElementById('balance-trend-chart').getContext('2d');
@@ -831,8 +831,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let cumulativeBalance = initialBalance;
 
         // Adicionar ponto inicial (saldo antes da primeira transação)
-        const firstTxDate = new Date(sortedDates[0] + 'T00:00:00');
-        balanceData.push({ x: new Date(firstTxDate.getTime() - 86400000), y: cumulativeBalance });
+        if (sortedDates.length > 0) {
+            const firstTxDate = new Date(sortedDates[0] + 'T00:00:00');
+            balanceData.push({ x: new Date(firstTxDate.getTime() - 86400000), y: cumulativeBalance });
+        }
+
 
         // Adicionar um ponto para cada dia com transações
         sortedDates.forEach(date => {
@@ -1458,8 +1461,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             if (generatedCount > 0) {
-              await batch.commit();
-              showToast(`${generatedCount} lançamento(s) recorrente(s) foram gerados.`);
+                await batch.commit();
+                showToast(`${generatedCount} lançamento(s) recorrente(s) foram gerados.`);
             }
 
         } catch (error) {
